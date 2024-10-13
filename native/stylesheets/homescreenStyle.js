@@ -83,4 +83,3 @@ export default StyleSheet.create({
 //     position: 'relative', // Change from 'absolute' to 'relative' to keep it in the flow of 'leftBox'
 //     marginBottom: 20, // Add margin to position above the bottom
 //   },
-});
