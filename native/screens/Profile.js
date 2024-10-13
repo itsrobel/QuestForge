@@ -19,28 +19,49 @@ const ProfileButton = ({title, icon, navigation}) => {
 
  // HealthBar component
  const HealthBar = ({ current, max }) => {
-    const percentage = (current / max) * 100; // Calculate the width percentage
+
+    const width = (current/max === 1) ? 200 : 
+                  (current/max === 0.75) ? 150 : 
+                  (current/max === 0.5) ? 100 : 
+                  (current/max === 0.25) ? 50 : 0;
+
+    
     
 
     return (
         <View style={styles.healthBarContainer}>
-            <View style={[styles.healthBar, { width: current}]} /> 
+            <View style={[styles.healthBar, { width: width }]} /> 
             {/* width: `${percentage}%`  */}
             <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
+
+            
         </View>
     );
 };
 
-const SpecialStatContainer = ({title, icon}) => {
+const specialStats = {
+    health: { current: 100, max: 100 },
+    xp: { current: 50, max: 100 },
+};
+
+const SpecialStatContainer = ({title, width}) => {
+
+    const widthActual = (width === 100) ? 300 : 
+                  (width === 75) ? 150 : 
+                  (width === 50) ? 100 : 
+                  (width === 25) ? 50 : 0;
+    
     return (
         <View style={styles.specialStatContainer}>
             <Text style={styles.statText}>{title}</Text>
+
+                
             
                 <View style={styles.inLineContainer}>
                     <Image source={require('../assets/Yellow star icon.png')} style={styles.statImage}/>
-                    <View style={styles.statBar}>
+                    <View style={[styles.statBar, {width: widthActual}]}>
                 
-                    </View>
+                </View>
 
                 
                 </View>
@@ -54,11 +75,13 @@ const Profile = ({ navigation }) => {
     
     // Stat values
     const stats = {
-        athletics: { current: 60, max: 100, icon: '../assets/dumbell_icon.png' },
-        creativity: { current: 50, max: 100, icon: '../assets/dumbell_icon.png'  },
-        knowledge: { current: 80, max: 100, icon: '../assets/dumbell_icon.png'  },
-        charisma: { current: 70, max: 100, icon: '../assets/dumbell_icon.png'  },
+        athletics: { current: 100, max: 100, icon: '../assets/dumbell_icon.png' },
+        creativity: { current: 75, max: 100, icon: '../assets/dumbell_icon.png'  },
+        knowledge: { current: 50, max: 100, icon: '../assets/dumbell_icon.png'  },
+        charisma: { current: 25, max: 100, icon: '../assets/dumbell_icon.png'  },
     };
+
+    const logoImage = require('../assets/logo.png');
 
     return (
         <View style={styles.container}>
@@ -67,7 +90,7 @@ const Profile = ({ navigation }) => {
             <View style={styles.entireContainer}>
 
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <Image source={require('../assets/logo.png')} style={[styles.image, {alignSelf: 'flex-start'}]} />
+                <Image source={logoImage} style={{alignSelf: 'flex-start', width: 500, height: 200,}} />
             </TouchableOpacity>
             
             
@@ -85,8 +108,8 @@ const Profile = ({ navigation }) => {
                         </View>
 
                         <View style={styles.roundedRectangle}>
-                            <SpecialStatContainer title="Health"/>
-                            <SpecialStatContainer title="XP"/>
+                            <SpecialStatContainer title="Health" width={specialStats.health.current}/>
+                            <SpecialStatContainer title="XP" width={specialStats.xp.current}/>
 
                         </View>
 
@@ -230,6 +253,7 @@ const styles = {
     profileButtonText: {
         color: '#C8DDE7',
         fontSize: 25,
+        fontFamily: 'Arial',
     },
     roundedRectangle: {
         // width: 400,
@@ -281,17 +305,18 @@ const styles = {
         fontSize: 20,
         textAlign: 'right',
         paddingRight: 30,
-        marginRight: 20,
+        marginRight: -20,
         // marignRight: 100,
         marginTop: 20,
+        marginBottom: 20,
         color: '#6976C3',
     },
 
     statBar: {
-        flex:1.5,
+        // flex:1.5,
         
-        backgroundColor: '#D9D9D9',
-        borderColor: '#B6B2CB',
+        backgroundColor: '#B6B2CB',
+        borderColor: '#D9D9D9',
         borderWidth: 5,
         borderRadius: 20,
         height: 50,
@@ -358,20 +383,21 @@ const styles = {
         flexDirection: 'row',
         alignItems: 'center',
         marginVertical: 5, // Space between bars
+        justifyContent: 'flex-end',
       },
       healthBar: {
         height: 30, // Height of the bar
         backgroundColor: 'rgba(57, 52, 70, 1)', // Bar color
         borderRadius: 5,
         marginRight: 10, // Space between bar and text
-        flex: 1, // Allows the bar to take remaining space
-        marginLeft: -80,
-        width: 10,
+        // flex: 1, // Allows the bar to take remaining space
+        // marginLeft: -80,
       },
       healthBarText: {
         color: 'rgba(60, 73, 143, 1)',
         fontSize: 20,
         marginBottom: 5,
+        marginRight: 10,
       },
       importedStatsContainer: {
         position: 'absolute',
@@ -390,9 +416,7 @@ const styles = {
         borderColor: '#393446',
         borderWidth: 5,
         borderRadius: 15,
-
-
-      }
+      },
 
     
 }

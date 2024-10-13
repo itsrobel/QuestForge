@@ -12,10 +12,10 @@ const HomeScreen = ({ navigation }) => {
 
     // Stat values
     const stats = {
-        health: { current: 100, max: 100 },
-        athletics: { current: 100, max: 100 },
-        creativity: { current: 100, max: 100 },
-        knowledge: { current: 100, max: 100 },
+        health: { current: 90, max: 100 },
+        athletics: { current: 50, max: 100 },
+        creativity: { current: 80, max: 100 },
+        knowledge: { current: 10, max: 100 },
         charisma: { current: 100, max: 100 },
     };
     
@@ -61,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
         const healthBarColor = current > 30 ? 'green' : 'red'; // Change color based on health level
         return (
             <View style={styles.healthBarContainer}>
-                <View style={[styles.healthBar, { width: `${percentage}%`, backgroundColor: healthBarColor }]} />
+                <View style={[styles.healthBar, { width: percentage, backgroundColor: healthBarColor }]} />
                 <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
             </View>
         );

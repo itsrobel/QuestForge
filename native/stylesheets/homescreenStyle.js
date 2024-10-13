@@ -50,13 +50,14 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5, // Space between bars
+    justifyContent: 'flex-end'
   },
   healthBar: {
     height: 20, // Height of the bar
     backgroundColor: 'green', // Default color, can be overridden by the component
     borderRadius: 5,
     marginRight: 10, // Space between bar and text
-    flex: 1, // Allows the bar to take remaining space
+    // flex: 1, // Allows the bar to take remaining space
   },
   healthBarText: {
     color: 'rgba(60, 73, 143, 1)',
