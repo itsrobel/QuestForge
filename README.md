@@ -1,3 +1,18 @@
+# About
+### ForgeQuest
+We created an RPG game that interwines the typical quests that you would play through while staying on top of your schoolwork, physical wellbeing, and emotional wellness!
+
+### Features (so far):
+- Going on adventures to build your stats and gather spells corresponds to real life activities & locations
+- Campus events are interwined with raids, a fun way to make use of your previous adventures as well as being involved with campus life.
+- To track your stories, you'll slowly build a photo album by completeing in-game quests and raids.
+
+Thank you,
+for checking out our game!
+
+- Ruslana, Yenmy, Robel, Natalie
+
+
 # Dev
 
 The Application is built with react native. To Start run one of the following in the client folder
