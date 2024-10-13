@@ -16,7 +16,7 @@ from game_master_handler import (
     CHARACTER_SELECTOR_PROMPT,
     STORY_GENERATOR_PROMPT,
 )
-from data_structs import Player
+from data_structs import Player, World, dworld
 from langchain_core.output_parsers import StrOutputParser
 
 llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0.7)
@@ -62,11 +62,23 @@ def handle_register(data):
 async def create_world(data):
     print(data)
     world_description = data.get("world")
+    name = data.get("name")
+    owner_id = data.get("owner_id")
     character = data.get("character")
     story = await story_tool.ainvoke(world_description, character)
+    world = World(name, owner_id, world_description)
+    dworld.insert_one(world)
 
     # emit("character_created", story, to=request.sid)
     return jsonify(message=story)
+
+
+@socketio.on("get_worlds")
+def get_worlds(data):
+    documents = dworld.find(
+        {"owner_id": data["id"]}
+    )  # Replace with your query criteria
+    emit("return_worlds", documents, to=request.sid)
 
 
 @app.route("/create_character", methods=["POST"])
