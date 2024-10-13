@@ -6,10 +6,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import Profile from './screens/Profile';
 import TrackStory from './screens/TrackStoryline';
+import WorldMap from './screens/WorldMap';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
+  
   return (
+
+
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home"> 
         <Stack.Screen
@@ -25,6 +30,11 @@ export default function App() {
         <Stack.Screen
           name="TrackStory"
           component={TrackStory} // Ensure this component is correctly defined in TrackStoryline.js
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="WorldMap"
+          component={WorldMap} // Ensure this component is correctly defined in TrackStoryline.js
           options={{headerShown: false}}
         />
       </Stack.Navigator>
