@@ -39,7 +39,13 @@ export default function App() {
         <Stack.Screen name="CreateWorld" component={CreateWorld} options={{ headerShown: false }} />
         <Stack.Screen name="SelectWorld" component={SelectWorld} options={{ headerShown: false }} />
       </Stack.Navigator> */}
-      <Stack.Navigator initialRouteName="CreateWorld">
+      
+      <Stack.Navigator initialRouteName="Opening">
+        <Stack.Screen
+          name="Opening"
+          component={Opening}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
