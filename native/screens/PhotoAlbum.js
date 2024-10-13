@@ -8,17 +8,17 @@ import { View, Image, TouchableOpacity, StatusBar, SafeAreaView, FlatList } from
 const PhotoAlbum = ({navigation}) => {
     const photos = [
         { id: '1', uri: '../assets/dumbell_icon.png' }, // Use require directly
-        { id: '2', uri: '../assets/dumbell_icon.png' },
-        { id: '3', uri: '../assets/dumbell_icon.png' },
-        { id: '4', uri: '../assets/dumbell_icon.png' },
+        { id: '2', uri: '../assets/Camera icon.png' },
+        { id: '3', uri: '../assets/books_icon.png' },
+        { id: '4', uri: '../assets/Star icon.png' },
         { id: '5', uri: '../assets/dumbell_icon.png'},
-        { id: '6', uri: '../assets/dumbell_icon.png'},
-        { id: '7', uri: '../assets/dumbell_icon.png' }, // Use require directly
-        { id: '8', uri: '../assets/dumbell_icon.png' },
+        { id: '6', uri: '../assets/Camera icon.png'},
+        { id: '7', uri: '../assets/books_icon.png' }, // Use require directly
+        { id: '8', uri: '../assets/Star icon.png' },
         { id: '9', uri: '../assets/dumbell_icon.png' },
-        { id: '10', uri: '../assets/dumbell_icon.png' },
-        { id: '11', uri: '../assets/dumbell_icon.png'},
-        { id: '12', uri: '../assets/dumbell_icon.png'},
+        { id: '10', uri: '../assets/Camera icon.png' },
+        { id: '7', uri: '../assets/books_icon.png' },
+        { id: '11', uri: '../assets/Star icon.png'},
         // Add more photos as needed
     ];
     
