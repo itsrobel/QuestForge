@@ -12,11 +12,11 @@ const HomeScreen = ({ navigation }) => {
 
     // Stat values
     const stats = {
-        health: { current: 80, max: 100 },
-        athletics: { current: 60, max: 100 },
-        creativity: { current: 50, max: 100 },
-        knowledge: { current: 90, max: 100 },
-        charisma: { current: 70, max: 100 },
+        health: { current: 100, max: 100 },
+        athletics: { current: 100, max: 100 },
+        creativity: { current: 100, max: 100 },
+        knowledge: { current: 100, max: 100 },
+        charisma: { current: 100, max: 100 },
     };
     
     const pickImage = async () => {
@@ -58,10 +58,10 @@ const HomeScreen = ({ navigation }) => {
     // HealthBar component
     const HealthBar = ({ current, max }) => {
         const percentage = (current / max) * 100; // Calculate the width percentage
-
+        const healthBarColor = current > 30 ? 'green' : 'red'; // Change color based on health level
         return (
             <View style={styles.healthBarContainer}>
-                <View style={[styles.healthBar, { width: `${percentage}%` }]} />
+                <View style={[styles.healthBar, { width: `${percentage}%`, backgroundColor: healthBarColor }]} />
                 <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
             </View>
         );
@@ -134,13 +134,13 @@ const HomeScreen = ({ navigation }) => {
 
        {/* Character Stats Container */}
        <View style={styles.statsContainer}>
-                {Object.entries(stats).map(([key, value]) => (
-                    <View style={styles.statBox} key={key}>
-                        <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
-                        <HealthBar current={value.current} max={value.max} />
-                    </View>
-                ))}
-        </View>
+          {Object.entries(stats).map(([key, value]) => (
+              <View style={styles.statBox} key={key}>
+                 <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
+                 <HealthBar current={value.current} max={value.max} />
+              </View>
+           ))}
+       </View>
     </View>
   );
 };

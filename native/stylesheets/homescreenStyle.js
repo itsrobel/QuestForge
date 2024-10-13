@@ -53,7 +53,7 @@ export default StyleSheet.create({
   },
   healthBar: {
     height: 20, // Height of the bar
-    backgroundColor: 'rgba(57, 52, 70, 1)', // Bar color
+    backgroundColor: 'green', // Default color, can be overridden by the component
     borderRadius: 5,
     marginRight: 10, // Space between bar and text
     flex: 1, // Allows the bar to take remaining space
