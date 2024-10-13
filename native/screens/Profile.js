@@ -1,5 +1,8 @@
 import * as React from 'react-native';
-import { useEffect } from 'react';
+
+import { View, Text, Image, TouchableOpacity, Button } from 'react-native';
+
+
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { useFonts } from 'expo-font';
 
@@ -152,24 +155,21 @@ const Profile = ({ navigation }) => {
                     </View> */}
                     <View style={styles.spaceContainer}></View>
                     
-                        <View style={styles.statsContainer}>
+                        {/* <View style={styles.statsContainer}>
 
                             {Object.entries(stats).map(([key, value]) => (
                                 <View style={styles.statBox} key={key}>
-
-                                    {/* <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text> */}
-                                    
-                                    <HealthBar current={value.current} max={value.max} title={key}/>
+                                    <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
+                                    <HealthBar current={value.current} max={value.max} />
                                     
                                 </View>
                             ))}
                             
 
-                        </View>
-                        {/* <View style={styles.statsContainer}>
-
                         </View> */}
-                       
+                        <View style={styles.statsContainer}>
+
+                        </View>
 
                     
 
@@ -307,11 +307,12 @@ const styles = {
         width: '100%',
         // height: '1000',
         marginBottom: 50,
+        backgroundColor: 'green'
         
 
     },
     spaceContainer: {
-        flex: .25,
+        flex: .5,
         backgroundColor: '#848ECB',
         margin: 20,
     },
@@ -345,7 +346,7 @@ const styles = {
     },
 
     statBar: {
-        // flex:1.5,
+        flex:1.5,
         
         backgroundColor: '#B6B2CB',
         borderColor: '#D9D9D9',
@@ -373,12 +374,13 @@ const styles = {
     profilePicture: {
         width: 150,
         height: 150,
-        backgroundColor: '#312D46',
+        backgroundColor: '#6976C3',
         borderRadius: 75,
         marginTop: 10,
     },
     statsContainer: {
-        flex: 1.5,
+        flex: 1,
+        backgroundColor: 'red',
         height: '100%',
         width: '100%',
         justifyContent: 'space-between',
@@ -421,7 +423,7 @@ const styles = {
         alignItems: 'flex-start',
       },
       healthBar: {
-        height: 30, // Height of the bar
+        height: 20, // Height of the bar
         backgroundColor: 'rgba(57, 52, 70, 1)', // Bar color
         borderRadius: 5,
         marginRight: 5, // Space between bar and text
