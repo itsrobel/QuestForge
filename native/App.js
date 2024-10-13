@@ -11,21 +11,21 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home"> 
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ title: 'Welcome' }}
         />
-
-        <Stack.Screen name="Profile" component={Profile}/>
-        <Stack.Screen name="TrackStory" component={TrackStory}/>
-
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+        />
+        <Stack.Screen
+          name="TrackStory"
+          component={TrackStory} // Ensure this component is correctly defined in TrackStoryline.js
+        />
       </Stack.Navigator>
-      {/* <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View> */}
     </NavigationContainer>
     
   );

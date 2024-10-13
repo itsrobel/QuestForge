@@ -11,4 +11,12 @@ export default StyleSheet.create({
     fontSize: 24,
     color: '#fff', // Set text color to white for better contrast
   },
+  buttonContainer: {
+    backgroundColor: 'rgba(224, 187, 117, 1)',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10, // Space between buttons
+    width: 150, // Set a width for consistent button size
+    alignItems: 'center', // Center align button text
+  },
 });
