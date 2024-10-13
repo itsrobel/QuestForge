@@ -6,7 +6,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import Profile from './screens/Profile';
 import TrackStory from './screens/TrackStoryline';
-import WorldMap from './screens/WorldMap';
 import CreateWorld from './screens/CreateWorld';
 import SelectWorld from './screens/SelectWorld';
 import PhotoAlbum from './screens/PhotoAlbum';
@@ -63,6 +62,23 @@ export default function App() {
           component={Opening}
           options={{ headerShown: false }}
         />
+        <Stack.Screen 
+          name = "CreateWorld"
+          component = {CreateWorld}
+          options = {{headerShown: false}}
+        />
+        <Stack.Screen 
+          name = "SelectWorld"
+          component = {SelectWorld}
+          options = {{headerShown: false}}
+        />
+
+        <Stack.Screen 
+          name = "PhotoAlbum"
+          component={PhotoAlbum}
+          options={{headerShown: false}}
+        />
+
         
       </Stack.Navigator>
     </NavigationContainer>

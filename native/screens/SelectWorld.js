@@ -63,12 +63,8 @@ const SelectWorld = ({ navigation }) => {
         </TouchableOpacity>
         {/* SelectWorld Button */}
         <TouchableOpacity
-          style={[
-            styles.buttonContainer,
-            { backgroundColor: "rgba(134, 102, 48, 1)" },
-          ]}
-          onPress={() => navigation.navigate("SelectWorld")}
-        >
+          style={[styles.buttonContainer,{ backgroundColor: "rgba(134, 102, 48, 1)" }]}
+          onPress={() => navigation.navigate("SelectWorld")}>
           <Text style={[styles.buttonText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Select World</Text>
         </TouchableOpacity>
       </View>
