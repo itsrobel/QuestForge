@@ -126,8 +126,10 @@ const Profile = ({ navigation }) => {
                 <View style={styles.informationContainer}>
 
                     <View style={styles.profileCard}>
-                        <View style={styles.profilePicture}></View>
-                        <Text style={styles.userName}>@username</Text>
+                        <View style={[styles.profilePicture, {flex: 1, alignItems:'center', justifyContent: 'center', padding: 40}]}>
+                            {/* <Image source={require('../assets/Controller icon.png')} style={{width: 75, height: 75, padding:10}} /> */}
+                        </View>
+                        <Text style={styles.userName}>@adaLovelace</Text>
                         
                         <View style={styles.profileButtons}>
                             <ProfileButton title="Photos" icon="../assets/Camera icon.png" navigation={navigation}/>
