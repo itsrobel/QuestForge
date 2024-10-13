@@ -107,6 +107,82 @@ PERSONAL_QUEST_PROMPT = PromptTemplate(
         "player_story",
     ],
 )
-# TODO: Create prompt for skill generation
-# TODO: Create prompt for group events
-# TODO: Create prompt for group battles
+
+
+skill_generator_prompt = r"""
+You are an AI RPG game master tasked with generating new skills for players based on their context. You will receive:
+- The stats of the player
+- The quest that the player completed
+- The effects of the quest
+- The player's ongoing story in the RPG
+Based on these parameters, create a new skill for the player, including:
+- A skill name
+- A brief description of the skill
+- A multiplier that affects the player's stats
+
+Format the output as a JSON with the following values:
+name: the name of the new skill,
+description: the description of the new skill,
+multiplier: float representing the skill's multiplier,
+story_extension: a narrative that extends the player's story based on the new skill.
+"""
+
+skill_generator_prompt_template = (
+    f"{anthropic_bedrock.HUMAN_PROMPT}:{skill_generator_prompt}\n\n"
+    f"<player_stats>{{player_stats}}</player_stats>\n\n"
+    f"<completed_quest>{{completed_quest}}</completed_quest>\n\n"
+    f"<quest_effects>{{quest_effects}}</quest_effects>\n\n"
+    f"Current Player Story:\n<player_story>{{player_story}}</player_story>\n\n{anthropic_bedrock.AI_PROMPT}:"
+)
+
+SKILL_GENERATOR_PROMPT = PromptTemplate(
+    template=skill_generator_prompt_template,
+    input_variables=[
+        "player_stats",
+        "completed_quest",
+        "quest_effects",
+        "player_story",
+    ],
+)
+character_selector_prompt = r"""
+You are an AI RPG game master responsible for selecting characters for players in a specific world. You will receive:
+- A description of the world
+Based on this information, generate a list of characters that the user can role-play as. Each character should include:
+- A name
+- A brief description
+
+Format the output as a JSON with the following values:
+characters: a list of character objects, each containing name and description.
+"""
+
+character_selector_prompt_template = (
+    f"{anthropic_bedrock.HUMAN_PROMPT}:{character_selector_prompt}\n\n"
+    f"<world>{{world}}</world>\n\n{anthropic_bedrock.AI_PROMPT}:"
+)
+
+CHARACTER_SELECTOR_PROMPT = PromptTemplate(
+    template=character_selector_prompt_template,
+    input_variables=["world"],
+)
+
+
+story_generator_prompt = r"""
+You are an AI RPG game master who creates engaging narratives for players based on their context. You will receive:
+- A description of the world
+- A character object containing name and description
+Based on this information, generate a compelling story that sets the stage for the character's adventures in the world.
+
+Format the output as a JSON with the following values:
+story: a narrative that immerses the player in their character's journey.
+"""
+
+story_generator_prompt_template = (
+    f"{anthropic_bedrock.HUMAN_PROMPT}:{story_generator_prompt}\n\n"
+    f"<world>{{world}}</world>\n\n"
+    f"<character>{{character}}</character>\n\n{anthropic_bedrock.AI_PROMPT}:"
+)
+
+STORY_GENERATOR_PROMPT = PromptTemplate(
+    template=story_generator_prompt_template,
+    input_variables=["world", "character"],
+)

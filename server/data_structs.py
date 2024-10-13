@@ -8,24 +8,6 @@ client = MongoClient("mongodb://localhost:27017/")
 db = client["game_db"]  # Use your database name here
 
 
-class PlayerState:
-    def __init__(
-        self, health: float, athleticism: float, creativity: int, knowledge: int
-    ):
-        self.health = health
-        self.athleticism = athleticism
-        self.creativity = creativity
-        self.knowledge = knowledge
-
-    def to_dict(self):
-        return {
-            "health": self.health,
-            "athleticism": self.athleticism,
-            "creativity": self.creativity,
-            "knowledge": self.knowledge,
-        }
-
-
 class Skill:
     def __init__(self, name, description, multiplier):
         self.name = name
@@ -54,47 +36,10 @@ class Skill:
         }
 
 
-class SkillGeneratorTool:
-    def __init__(self, llm):
-        self.llm = llm
-
-    def generate_skill(self, input_data):
-        player_stats = input_data.get("player_stats", {})
-        completed_quest = input_data.get("completed_quest", "")
-        quest_effects = input_data.get("quest_effects", "")
-        story = input_data.get("story", "")
-
-        # Prompt for LLM to generate a new skill
-        prompt = f"""
-        Based on the following parameters, generate a new skill for the player:
-        - Player Stats: {player_stats}
-        - Completed Quest: {completed_quest}
-        - Quest Effects: {quest_effects}
-        - Story: {story}
-
-        Generate a skill name, a brief description of the skill, and a multiplier that affects the player's stats.
-        """
-
-        # Use the LLM to generate the skill
-        response = self.llm(prompt)
-        skill_data = response.json()
-
-        new_skill_name = skill_data.get("new_skill_name")
-        skill_description = skill_data.get("skill_description")
-        skill_multiplier = skill_data.get("skill_multiplier")
-
-        # Generate a story extension
-        story_extension = f"With the {completed_quest} completed, the player discovered an ancient artifact within the lair, granting them {new_skill_name}. {skill_description}"
-
-        # Create the Skill object
-        skill = Skill(new_skill_name, skill_description, skill_multiplier)
-
-        return {"skill": skill, "story_extension": story_extension}
-
-
 class Player:
-    def __init__(self, name, health=100, strength=10, knowledge=10):
+    def __init__(self, name, description, health=100, strength=10, knowledge=10):
         self.name = name
+        self.discription = description
         self.health = health
         self.strength = strength
         self.knowledge = knowledge

@@ -12,7 +12,7 @@ from langchain_openai import OpenAI
 
 # import os
 from dotenv import load_dotenv
-from data_structs import PlayerState
+from data_structs import Player
 
 # os.environ["OPENAI_API_KEY"] = "your-openai-api-key-here"
 load_dotenv()
@@ -39,7 +39,7 @@ async def test_llm_chain(player_stats, quest, quest_effect, player_story):
 
 
 async def test_pipeline():
-    stats = PlayerState(100, 12.2, 16, 20)
+    stats = Player(100, 12, 16, 20)
     quest = "Go to the library and study "
     quest_effect = "knowledge"
     player_story = "the player is trying to find the vampire king"
