@@ -52,14 +52,9 @@ def handle_register(data):
     emit("register_response", {"message": f"Registered as {username}"})
 
 
-@socketio.on("create_party")
-def handle_create_party(data):
-    party_id = str(uuid.uuid4())
-    rooms[party_id] = {"users": [request.sid], "leader": request.sid}
-    join_room(party_id)
-    emit(
-        "party_created", {"party_id": party_id, "message": "Party created successfully"}
-    )
+@socketio.on("player_quest")
+def handle_player_event():
+    pass
 
 
 @socketio.on("invite_to_party")
