@@ -8,44 +8,63 @@ import WorldMap from './WorldMap';
 import styles from '../stylesheets/homescreenStyle'
 
 const HomeScreen = ({ navigation }) => {
-    const [uploadedImages, setUploadedImages] = useState([]);
+    const [selectedImages, setSelectedImages] = useState([]);
 
+    // Stat values
+    const stats = {
+        health: { current: 80, max: 100 },
+        athletics: { current: 60, max: 100 },
+        creativity: { current: 50, max: 100 },
+        knowledge: { current: 90, max: 100 },
+        charisma: { current: 70, max: 100 },
+    };
+    
     const pickImage = async () => {
         // Ask for permission to access the image library
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        
+    
         if (permissionResult.granted === false) {
-            alert('Permission to access camera roll is required!');
-            return;
+          alert('Permission to access camera roll is required!');
+          return;
         }
-        
+    
         // Pick an image from the device's image library
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images, // Only images
-            allowsEditing: true,
-            aspect: [4, 3], // You can set the aspect ratio if you want
-            quality: 1, // High-quality image
+          mediaTypes: ImagePicker.MediaTypeOptions.Images, // Only images
+          allowsEditing: true,
+          aspect: [4, 3], // You can set the aspect ratio if you want
+          quality: 1, // High-quality image
         });
-        
+    
         // Log the result for debugging purposes
         console.log(result);
-        
+    
         // Check if an image was selected
         if (!result.canceled) {
-            // Check if result.assets exists and use the first asset's uri
-            if (result.assets && result.assets.length > 0) {
-                // Save the image URI to state and log the updated array
-                setUploadedImages(prevImages => {
-                    const newImages = [...prevImages, result.assets[0].uri];
-                    console.log("Uploaded Images:", newImages); // Log the updated images
-                    return newImages; // Return the new array
-                });
-            } else {
-                alert('No image selected!');
-            }
+          // Check if result.assets exists and use the first asset's uri
+          if (result.assets && result.assets.length > 0) {
+            setSelectedImages(prevImages => [
+              ...prevImages,
+              result.assets[0].uri
+            ]); // Save the image URI to state
+          } else {
+            alert('No image selected!');
+          }
         } else {
-            alert('Image picking was canceled!');
+          alert('Image picking was canceled!');
         }
+    };
+
+    // HealthBar component
+    const HealthBar = ({ current, max }) => {
+        const percentage = (current / max) * 100; // Calculate the width percentage
+
+        return (
+            <View style={styles.healthBarContainer}>
+                <View style={[styles.healthBar, { width: `${percentage}%` }]} />
+                <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
+            </View>
+        );
     };
     
     return (
@@ -89,21 +108,18 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
        </View>
 
-       {/* Display Uploaded Images */}
-       {/* {uploadedImages.length > 0 && (
-                <ScrollView style={{ position: 'absolute', top: 100, width: '100%', alignItems: 'center' }}>
-                    <Text style={{ color: '#fff', textAlign: 'center' }}>Uploaded Images:</Text>
-                    {uploadedImages.map((uri, index) => (
-                        <Image
-                            key={index}
-                            source={{ uri }} // Use the image URI
-                            style={{ width: 200, height: 200, marginTop: 10 }} // You can adjust the size
-                        />
-                    ))}
-                </ScrollView>
-        )} */}
+       {/* Character Stats Container */}
+       <View style={styles.statsContainer}>
+                {Object.entries(stats).map(([key, value]) => (
+                    <View style={styles.statBox} key={key}>
+                        <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
+                        <HealthBar current={value.current} max={value.max} />
+                    </View>
+                ))}
+        </View>
     </View>
   );
 };
+
 
 export default HomeScreen;
