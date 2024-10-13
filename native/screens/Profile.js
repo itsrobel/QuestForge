@@ -13,6 +13,18 @@ const ProfileButton = ({title, icon}) => {
     )
 }
 
+ // HealthBar component
+ const HealthBar = ({ current, max }) => {
+    const percentage = (current / max) * 100; // Calculate the width percentage
+
+    return (
+        <View style={styles.healthBarContainer}>
+            <View style={[styles.healthBar, { width: `${percentage}%` }]} />
+            <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
+        </View>
+    );
+};
+
 const SpecialStatContainer = ({title, icon}) => {
     return (
         <View style={styles.specialStatContainer}>
@@ -33,6 +45,14 @@ const SpecialStatContainer = ({title, icon}) => {
 }
 
 const Profile = ({ navigation }) => {
+    // Stat values
+    const stats = {
+        athletics: { current: 60, max: 100, icon: '../assets/dumbell_icon.png' },
+        creativity: { current: 50, max: 100, icon: '../assets/dumbell_icon.png'  },
+        knowledge: { current: 90, max: 100, icon: '../assets/dumbell_icon.png'  },
+        charisma: { current: 70, max: 100, icon: '../assets/dumbell_icon.png'  },
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.entireContainer}>
@@ -58,13 +78,32 @@ const Profile = ({ navigation }) => {
                         </View>
 
                     </View>
-                    <View style={styles.statsContainer}>
-                        <ProfileButton title="TEST"/>
-                        <ProfileButton title="TEST"/>
-                        <ProfileButton title="TEST"/>
-                        <ProfileButton title="TEST"/>
+                    {/* <View style={styles.statsContainer}>
+                        <HealthBar title="TEST"/>
+                        <HealthBar title="TEST"/>
+                        <HealthBar title="TEST"/>
+                        <HealthBar current={50} max={100} />
                 
-                    </View>
+                    </View> */}
+                    <View style={styles.spaceContainer}></View>
+                    
+                        {/* <View style={styles.statsContainer}>
+
+                            {Object.entries(stats).map(([key, value]) => (
+                                <View style={styles.statBox} key={key}>
+                                    <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
+                                    <HealthBar current={value.current} max={value.max} />
+                                    
+                                </View>
+                            ))}
+                            
+
+                        </View> */}
+                        <View style={styles.statsContainer}>
+
+                        </View>
+
+                    
 
                 </View>
                 
@@ -110,7 +149,7 @@ const styles = {
         
     },
     profileCard: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
 
@@ -159,6 +198,10 @@ const styles = {
 
         borderRadius: 12,
     },
+    userName: {
+        fontSize: 20,
+
+    },
     buttonImage: {
         width: 50,
         height: 50,
@@ -171,40 +214,32 @@ const styles = {
     roundedRectangle: {
         // width: 400,
         flex: 3,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
 
         width: '80%',
-        height: '100%',
+        height: '110%',
         // height: 00,
-        marginTop: 40,
-        // padding: 10,
+        // marginTop: 20,
+        padding: 25,
         backgroundColor: '#312D46',
         borderRadius: 12,
     },
     informationContainer: {
         flex: 4.5,
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
         // padding: 20,
         width: '100%',
         // height: '1000',
-        backgroundColor: 'green',
         marginBottom: 50,
+        backgroundColor: 'green'
         
 
     },
     spaceContainer: {
-        flex: 1,
+        flex: .5,
         backgroundColor: '#848ECB',
         margin: 20,
-    },
-    statsContainer: {
-        flex: 1,
-        width: 10,
-        flexDirection: 'column',
-        flex: 1,
-
     },
     entireContainer: {
         // flex: 1,
@@ -214,53 +249,105 @@ const styles = {
         // justifyContent: 'flex-start',
         flexDirection: 'column',
         alignItems: 'auto',
-        backgroundColor: 'red',
     },
     specialStatContainer: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'center',
-        // alignItems: 'center',
+        justifyContent: 'space-between',
+
     
     },
     statText: {
         flex: 1,
         fontSize: 20,
         textAlign: 'right',
-        paddingRight: 50,
+        paddingRight: 20,
         // marignRight: 100,
         marginTop: 20,
-        marginBottom: -50,
         color: '#6976C3',
     },
+
     statBar: {
+        flex:1.5,
         
         backgroundColor: '#D9D9D9',
         borderColor: '#B6B2CB',
         borderWidth: 5,
         borderRadius: 20,
-        width: 250,
         height: 50,
+        marginRight: 20,
+        
+        
     },
     inLineContainer: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'center',
+        marginTop: -50,
+        justifyContent: 'space-between',
+        marginRight: -20,
     },
     statImage: {
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         resizeMode: 'contain',
-        marginLeft: 20,
+        
     },
     profilePicture: {
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         backgroundColor: '#6976C3',
-        borderRadius: 50,
+        borderRadius: 75,
         marginTop: 10,
     },
+    statsContainer: {
+        flex: 1,
+        backgroundColor: 'red',
+        height: '100%',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'column',
+        marginRight: 20,
+        // position: 'absolute',
+        // top: 20, // Position from the top
+        // right: 20, // Align to the right
+        // backgroundColor: 'rgba(15, 13, 51, 1)', // Set background color to red
+        // padding: 10, // Padding for the red container
+        // borderRadius: 10, // Optional rounded corners
+        
+      },
+      statBox: {
+        flex:1,
+        flexDirection: 'row',
+        backgroundColor: '#DDF5FD', // Green background for each stat box
+        width: '100%', // Width of each stat box
+        padding: 15,
+        marginVertical: 10, // Increased vertical space between boxes
+        borderRadius: 5, // Optional rounded corners for boxes
+        // width: 200, // Width of each stat box
+      },
+      statLabel: {
+        color: 'rgba(60, 73, 143, 1)',
+        fontSize: 18,
+      },
+      healthBarContainer: {
+        
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 5, // Space between bars
+      },
+      healthBar: {
+        height: 20, // Height of the bar
+        backgroundColor: 'rgba(57, 52, 70, 1)', // Bar color
+        borderRadius: 5,
+        marginRight: 10, // Space between bar and text
+        flex: 1, // Allows the bar to take remaining space
+      },
+      healthBarText: {
+        color: 'rgba(60, 73, 143, 1)',
+        fontSize: 20,
+      },
 
     
 }
