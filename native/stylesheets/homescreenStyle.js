@@ -19,4 +19,12 @@ export default StyleSheet.create({
     width: 150, // Set a width for consistent button size
     alignItems: 'center', // Center align button text
   },
+  fileButton: {
+    backgroundColor: 'rgba(224, 187, 117, 1)', // Button background color
+    borderRadius: 5,
+    padding: 10,
+    marginLeft: 10, // Space between the file button and the rest
+    alignItems: 'center', // Center align button text
+    width: 200, // You can adjust this width
+  },
 });
