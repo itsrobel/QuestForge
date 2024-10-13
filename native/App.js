@@ -45,6 +45,26 @@ export default function App() {
             ),
           })}
         />
+        {/* <Stack.Screen
+          name="CreateWorld"
+          component={CreateWorld}
+          options={({ navigation }) => ({
+            headerShown: true,
+            header: () => (
+              <Image source={logo} style={{ width: 40, height: 40 }} />
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="SelectWorld"
+          component={SelectWorld}
+          options={({ navigation }) => ({
+            headerShown: true,
+            header: () => (
+              <Image source={logo} style={{ width: 40, height: 40 }} />
+            ),
+          })}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
