@@ -24,8 +24,11 @@ const SelectWorld = ({ navigation }) => {
 
   useEffect(() => {
     // Listen for messages from the server
-    socket.on("message", (data) => {
-      setMessage(data);
+    socket.on("get_worlds", (data) => {
+      for (let i = 0; i < len(data); i++) {
+        let wt  = {id: i ,world: data[i], seed: "some cool number"}
+        worldData.push(wt)
+      } 
     });
 
     // Clean up the listener on component unmount
