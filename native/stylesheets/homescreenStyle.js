@@ -77,6 +77,7 @@ export default StyleSheet.create({
     // alignItems: 'center', // Center children horizontally
     // paddingBottom: 20,
   },
+})
 //   uploadButtonContainer: {
 //     alignItems: 'center', // Center align the button
 //     justifyContent: 'center',
