@@ -16,12 +16,16 @@ const SelectWorld = ({ navigation }) => {
   const worldData = [
     { id: 1, world: "My World", seed: "fsdfsdfsd" },
     { id: 2, world: "My World 2", seed: "fsdfsdfvcxsd" },
+  
   ];
 
   useEffect(() => {
     // Listen for messages from the server
-    socket.on("message", (data) => {
-      setMessage(data);
+    socket.on("get_worlds", (data) => {
+      for (let i = 0; i < len(data); i++) {
+        let wt  {id: i ,world: world[i], seed: "some cool number"}
+        worldData.push(wt)
+      } 
     });
 
     // Clean up the listener on component unmount

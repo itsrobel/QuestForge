@@ -76,7 +76,7 @@ async def create_world(data):
 @socketio.on("get_worlds")
 def get_worlds(data):
     documents = dworld.find(
-        {"owner_id": data["id"]}
+        # {"owner_id": data["id"]}
     )  # Replace with your query criteria
     emit("return_worlds", documents, to=request.sid)
 
