@@ -60,7 +60,7 @@ const SelectWorld = ({ navigation }) => {
       />
 
 
-      <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Or Select a world Down Below</Text>
+      <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Or Select A World Down Below</Text>
       </View>
       
 
@@ -110,12 +110,12 @@ const styles = StyleSheet.create({
   topButtonContainer: {
     flexDirection: 'row', // Align buttons horizontally
     justifyContent: 'space-between', // Space between the buttons
-    marginBottom: 10, // Reduced space below buttons
+    marginBottom: 10, // Reduced space below buttons  
   },
   buttonContainer: {
     borderRadius: 5,
     padding: 10,
-    width: '48%', // Each button takes 48% of the available width
+    width: '30%', // Each button takes 48% of the available width
     alignItems: 'center', // Center the text inside the button
     paddingVertical: 15, // Adjust padding for a tighter look
   },
