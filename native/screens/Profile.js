@@ -16,10 +16,13 @@ const ProfileButton = ({title, icon}) => {
  // HealthBar component
  const HealthBar = ({ current, max }) => {
     const percentage = (current / max) * 100; // Calculate the width percentage
+    
 
     return (
         <View style={styles.healthBarContainer}>
-            <View style={[styles.healthBar, { width: `${percentage}%` }]} />
+
+            <View style={styles.healthBar} /> 
+            {/* width: `${percentage}%`  */}
             <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
         </View>
     );
@@ -49,7 +52,7 @@ const Profile = ({ navigation }) => {
     const stats = {
         athletics: { current: 60, max: 100, icon: '../assets/dumbell_icon.png' },
         creativity: { current: 50, max: 100, icon: '../assets/dumbell_icon.png'  },
-        knowledge: { current: 90, max: 100, icon: '../assets/dumbell_icon.png'  },
+        knowledge: { current: 80, max: 100, icon: '../assets/dumbell_icon.png'  },
         charisma: { current: 70, max: 100, icon: '../assets/dumbell_icon.png'  },
     };
 
@@ -87,21 +90,24 @@ const Profile = ({ navigation }) => {
                     </View> */}
                     <View style={styles.spaceContainer}></View>
                     
-                        {/* <View style={styles.statsContainer}>
+                        <View style={styles.statsContainer}>
 
                             {Object.entries(stats).map(([key, value]) => (
                                 <View style={styles.statBox} key={key}>
+
                                     <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
+
                                     <HealthBar current={value.current} max={value.max} />
                                     
                                 </View>
                             ))}
                             
 
-                        </View> */}
-                        <View style={styles.statsContainer}>
-
                         </View>
+                        {/* <View style={styles.statsContainer}>
+
+                        </View> */}
+                       
 
                     
 
@@ -232,12 +238,11 @@ const styles = {
         width: '100%',
         // height: '1000',
         marginBottom: 50,
-        backgroundColor: 'green'
         
 
     },
     spaceContainer: {
-        flex: .5,
+        flex: .25,
         backgroundColor: '#848ECB',
         margin: 20,
     },
@@ -261,7 +266,8 @@ const styles = {
         flex: 1,
         fontSize: 20,
         textAlign: 'right',
-        paddingRight: 20,
+        paddingRight: 30,
+        marginRight: 20,
         // marignRight: 100,
         marginTop: 20,
         color: '#6976C3',
@@ -301,8 +307,7 @@ const styles = {
         marginTop: 10,
     },
     statsContainer: {
-        flex: 1,
-        backgroundColor: 'red',
+        flex: 1.5,
         height: '100%',
         width: '100%',
         justifyContent: 'space-between',
@@ -330,9 +335,10 @@ const styles = {
       statLabel: {
         color: 'rgba(60, 73, 143, 1)',
         fontSize: 18,
+        marginBottom: 5,
       },
       healthBarContainer: {
-        
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         marginVertical: 5, // Space between bars
@@ -343,11 +349,34 @@ const styles = {
         borderRadius: 5,
         marginRight: 10, // Space between bar and text
         flex: 1, // Allows the bar to take remaining space
+        marginLeft: -80,
+        width: 10,
       },
       healthBarText: {
         color: 'rgba(60, 73, 143, 1)',
         fontSize: 20,
+        marginBottom: 5,
       },
+      importedStatsContainer: {
+        position: 'absolute',
+        top: 20, // Position from the top
+        right: 20, // Align to the right
+        backgroundColor: 'rgba(15, 13, 51, 1)', // Set background color to red
+        padding: 10, // Padding for the red container
+        borderRadius: 10, // Optional rounded corners
+      },
+      contStatBar:{
+        height: 44,
+        width: 276,
+        marginRight: 10, // Space between bar and text
+        marginLeft: -80,
+        backgroundColor: '#D9D9D9',
+        borderColor: '#393446',
+        borderWidth: 5,
+        borderRadius: 15,
+
+
+      }
 
     
 }
