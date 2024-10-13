@@ -9,7 +9,12 @@ from langchain_openai import OpenAI
 import json
 import uuid
 import os
-from game_master_handler import GROUP_BOSS_FIGHT_PROMPT
+from game_master_handler import (
+    GROUP_BOSS_FIGHT_PROMPT,
+    CHARACTER_SELECTOR_PROMPT,
+    STORY_GENERATOR_PROMPT,
+)
+from data_structs import Player
 from langchain_core.output_parsers import StrOutputParser
 
 llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0.7)
@@ -25,7 +30,8 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 
 group_boss_fight_chain = GROUP_BOSS_FIGHT_PROMPT | llm | StrOutputParser()
-
+character_selector_tool = CHARACTER_SELECTOR_PROMPT | llm | StrOutputParser()
+story_tool = STORY_GENERATOR_PROMPT | llm | StrOutputParser()
 # Store user data (in a real application, use a database)
 users = {}
 rooms = {}
@@ -49,7 +55,37 @@ def handle_disconnect():
 def handle_register(data):
     username = data["username"]
     users[request.sid] = {"username": username, "stats": data["stats"]}
-    emit("register_response", {"message": f"Registered as {username}"})
+    emit("register_response", {"message": f"Registered as {username}"}, to=request.sid)
+
+
+@socketio.on("create_world")
+async def create_world(data):
+    world_description = data.get("world")
+    character = data.get("character")
+    story = await story_tool.ainvoke(world_description, character)
+
+    emit("character_created", story, to=request.sid)
+
+
+@socketio.on("create_character")
+async def create_character(data):
+    # Extract user input from the received data
+    world_description = data.get("world")
+    character_name = data.get("name")
+
+    # Create character using LangChain tools
+    character_data = await character_selector_tool.ainvoke(world_description)
+    character = character_data[0]  # Assume first character is selected
+
+    # Create a Player instance
+    player = Player(name=character_name, description=character)
+
+    # Prepare response data
+    response_data = player.to_dict()
+    response_data["selected_character"] = character  # Include character data
+
+    # Emit the response back to the client
+    emit("character_created", response_data, to=request.sid)
 
 
 @socketio.on("player_quest")

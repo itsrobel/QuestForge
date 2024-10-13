@@ -148,11 +148,10 @@ character_selector_prompt = r"""
 You are an AI RPG game master responsible for selecting characters for players in a specific world. You will receive:
 - A description of the world
 Based on this information, generate a list of characters that the user can role-play as. Each character should include:
-- A name
-- A brief description
 
 Format the output as a JSON with the following values:
-characters: a list of character objects, each containing name and description.
+A name: 
+A description:
 """
 
 character_selector_prompt_template = (
