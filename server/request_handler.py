@@ -9,6 +9,8 @@ from langchain_openai import OpenAI
 import json
 import uuid
 import os
+
+from werkzeug.wrappers import response
 from game_master_handler import (
     GROUP_BOSS_FIGHT_PROMPT,
     CHARACTER_SELECTOR_PROMPT,
@@ -19,12 +21,10 @@ from langchain_core.output_parsers import StrOutputParser
 
 llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0.7)
 
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "secret!"
-
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "secret!"
+# TODO: limit the allowed origins to just be the user interface
+print("starting socket server")
 CORS(app, resources={r"/*": {"origins": "*"}})
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -58,16 +58,18 @@ def handle_register(data):
     emit("register_response", {"message": f"Registered as {username}"}, to=request.sid)
 
 
-@socketio.on("create_world")
+@app.route("/create_world", methods=["POST"])
 async def create_world(data):
+    print(data)
     world_description = data.get("world")
     character = data.get("character")
     story = await story_tool.ainvoke(world_description, character)
 
-    emit("character_created", story, to=request.sid)
+    # emit("character_created", story, to=request.sid)
+    return jsonify(message=story)
 
 
-@socketio.on("create_character")
+@app.route("/create_character", methods=["POST"])
 async def create_character(data):
     # Extract user input from the received data
     world_description = data.get("world")
@@ -84,8 +86,9 @@ async def create_character(data):
     response_data = player.to_dict()
     response_data["selected_character"] = character  # Include character data
 
+    return jsonify(message=response_data)
     # Emit the response back to the client
-    emit("character_created", response_data, to=request.sid)
+    # emit("character_created", response_data, to=request.sid)
 
 
 @socketio.on("player_quest")
