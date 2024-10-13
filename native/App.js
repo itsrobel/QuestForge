@@ -12,6 +12,7 @@ import SelectWorld from './screens/SelectWorld';
 import PhotoAlbum from './screens/PhotoAlbum';
 import Login from './Login'; // Import the Login component
 import { auth } from './firebaseConfig';
+import Opening from './screens/Opening';
 
 const Stack = createNativeStackNavigator();
 const logo = require('./assets/logo.png'); // Ensure you have the correct path to your logo image
@@ -41,11 +42,7 @@ export default function App() {
       </Stack.Navigator> */}
       
       <Stack.Navigator initialRouteName="Opening">
-        <Stack.Screen
-          name="Opening"
-          component={Opening}
-          options={{ headerShown: false }}
-        />
+        
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -82,6 +79,12 @@ export default function App() {
           component={SelectWorld}
           options={{ headerShown: false }}
         />
+        <Stack.Screen 
+          name="Opening"
+          component={Opening}
+          options={{ headerShown: false }}
+        />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
