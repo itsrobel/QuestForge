@@ -23,16 +23,8 @@ export default function App() {
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={({ navigation }) => ({
-            headerShown: true,
-            header: () => (
-              <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
-                <Image source={logo} style={{ width: 50, height: 50 }} />
-              </TouchableWithoutFeedback>
-            ),
-          })}
+          options={{ headerShown: false }}
         />
-        
         <Stack.Screen
           name="TrackStory"
           component={TrackStory}

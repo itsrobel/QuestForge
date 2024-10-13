@@ -73,9 +73,15 @@ const Profile = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.entireContainer}>
             
-            <Image source={require('../assets/logo.png')} style={styles.image} />
+
+            <View style={styles.entireContainer}>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <Image source={require('../assets/logo.png')} style={[styles.image, {alignSelf: 'flex-start'}]} />
+            </TouchableOpacity>
+            
+            
                 
                 
                 <View style={styles.informationContainer}>
@@ -143,16 +149,20 @@ const Profile = ({ navigation }) => {
 
 
 const styles = {
+    logoContainer: {
+        flex: 2,
+        backgroundColor: 'red',
+
+    },
     image: {
         flex: 2,
-        width: 500,
-        height: 500,
+        width: 400,
+        height: 400,
         resizeMode: 'cover',
         marginLeft: -80,
-        marginTop: -50,
-        padding: 20,
-        marginBottom: -40,
-        marginBottom: -50,
+        marginTop: 50,
+        paddingBottom: 50,
+        paddingTop: 80,
         flexShrink: 0,
     },
     container: {
@@ -361,7 +371,7 @@ const styles = {
         marginVertical: 5, // Space between bars
       },
       healthBar: {
-        height: 20, // Height of the bar
+        height: 30, // Height of the bar
         backgroundColor: 'rgba(57, 52, 70, 1)', // Bar color
         borderRadius: 5,
         marginRight: 10, // Space between bar and text
