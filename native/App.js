@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import Profile from './screens/Profile';
-
+import TrackStory from './screens/TrackStoryline';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -19,6 +19,7 @@ export default function App() {
         />
 
         <Stack.Screen name="Profile" component={Profile}/>
+        <Stack.Screen name="TrackStory" component={TrackStory}/>
 
       </Stack.Navigator>
       {/* <View style={styles.container}>
