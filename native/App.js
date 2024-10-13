@@ -36,12 +36,7 @@ export default function App() {
         <Stack.Screen
           name="WorldMap"
           component={WorldMap}
-          options={({ navigation }) => ({
-            headerShown: true,
-            header: () => (
-              <Image source={logo} style={{ width: 400, height: 400 }} />
-            ),
-          })}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="PhotoAlbum"
