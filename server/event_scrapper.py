@@ -1,25 +1,31 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from bs4 import BeautifulSoup
+import requests
 
 events_dict = {"Football": "https://gohuskies.com/sports/football/schedule/2024"}
 
 
-driver = webdriver.Chrome()
-print("hello")
+page = requests.get(events_dict["Football"])
 
-driver.get(events_dict["Football"])
 
-title = driver.title
+# driver = webdriver.Chrome()
 
-driver.implicitly_wait(0.5)
+# driver.get(events_dict["Football"])
 
-text_box = driver.find_element(by=By.NAME, value="my-text")
-submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
+# title = driver.title
+# driver.implicitly_wait(0.5)
 
-text_box.send_keys("Selenium")
-submit_button.click()
 
-message = driver.find_element(by=By.ID, value="message")
-text = message.text
+# soup = driver.page_source
+soup = BeautifulSoup(page.content, "html.parser")
+games = {}
 
-driver.quit()
+
+coming_games = soup.find_all(class_="upcoming-game")
+for game in coming_games:
+    date = game.find(class_="sidearm-schedule-game-opponent-date").text.strip()
+    name = game.find(class_="sidearm-schedule-game-opponent-name").text.strip()
+    location = game.find(class_="sidearm-schedule-game-location").text.strip()
+    games[date] = {"team": name, "location": location}
+print(games)
