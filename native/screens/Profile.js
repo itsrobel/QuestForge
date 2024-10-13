@@ -45,13 +45,9 @@ const ProfileButton = ({title, icon, navigation}) => {
             <View style={[styles.healthBar, { width: width }]} /> 
             {/* width: `${percentage}%`  */}
             <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
-
-            
-            
-
             
         </View>
-            <Image source={image} style={[styles.buttonImage, {marginRight: 20}]}/>
+            <Image source={image} style={{marginRight: 20, width: 90, height: 90, resizeMode:'contain'}}/>
         </View>
     );
 };
