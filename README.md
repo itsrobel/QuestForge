@@ -15,3 +15,11 @@ playright - webscapping for events happening
 Google Maps - for event location
 
 Auth0 - for mobile login
+
+## Env
+for react native to work for web run the following
+
+```
+npm config set legacy-peer-deps true
+npx expo install react-native-web @expo/metro-runtime
+```
