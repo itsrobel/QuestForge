@@ -1,4 +1,5 @@
 from typing import NamedTuple
+import uuid
 from pymongo import MongoClient
 
 # Connect to MongoDB
@@ -54,6 +55,7 @@ class Skill:
 
 class Player:
     def __init__(self, name, description, health=100, strength=10, knowledge=10):
+        self.id = uuid.uuid4()
         self.name = name
         self.discription = description
         self.health = health

@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
-
+import game_master_handler
 from flask import Flask, request
 from flask_socketio import SocketIO, join_room, leave_room, emit
 
@@ -16,7 +16,7 @@ from game_master_handler import (
     CHARACTER_SELECTOR_PROMPT,
     STORY_GENERATOR_PROMPT,
 )
-from data_structs import Player, World, dworld
+from data_structs import Player, World, dworld, dplayer
 from langchain_core.output_parsers import StrOutputParser
 
 llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0.7)
@@ -93,19 +93,39 @@ async def create_character(data):
 
     # Create a Player instance
     player = Player(name=character_name, description=character)
+    dplayer.insert_one(player)
 
     # Prepare response data
     response_data = player.to_dict()
     response_data["selected_character"] = character  # Include character data
 
     return jsonify(message=response_data)
-    # Emit the response back to the client
-    # emit("character_created", response_data, to=request.sid)
 
 
-@socketio.on("player_quest")
-def handle_player_event():
-    pass
+@app.route("/player_event", methods=["POST"])
+async def handle_player_event(data):
+    quest = data["quest"]
+    quest_effect = "knowledge"
+    player_story = "the player is trying to find the vampire king"
+
+    player = dplayer.find_one({"id": data["id"]})
+    if player:
+        llm_chain = game_master_handler.PERSONAL_QUEST_PROMPT | llm | StrOutputParser()
+
+        response = await llm_chain.ainvoke(
+            {
+                "\nchange": 0,
+                "player_stats": player["player_stats"],
+                "quest": quest,
+                "quest_effect": quest_effect,
+                "player_story": player_story,
+            }
+        )
+        # util.info(response)
+        # print(response)
+
+        return jsonify(message=response)
+    return jsonify(message="player does not exist")
 
 
 @socketio.on("invite_to_party")
