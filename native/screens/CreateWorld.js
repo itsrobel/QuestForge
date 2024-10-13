@@ -92,12 +92,14 @@ const CreateWorld = ({ navigation }) => {
                 </TouchableOpacity>
         </View>
 
-        {/* Display Usernames */}
+        {/* Display Usernames */}        
         <View style={styles.usernamesContainer}>
-                <Text style={styles.label}>Usernames:</Text>
+            <Text style={styles.label}>Added Players:</Text>
+            <View style={styles.usernamesRow}>
                 {usernames.map((username, index) => (
-                    <Text key={index} style={styles.usernameText}>{username}</Text>
+                <Text key={index} style={styles.usernameText}>{username}</Text>
                 ))}
+            </View>
         </View>
 
         {/* Create World Button at the Bottom */}

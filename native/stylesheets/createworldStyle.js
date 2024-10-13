@@ -44,20 +44,20 @@ export default StyleSheet.create({
         borderWidth: 1, // Border thickness
         borderRadius: 5, // Rounded corners
         paddingHorizontal: 10, // Padding inside the input
-        backgroundColor: 'rgba(202, 152, 69, 1)', // Input background color
+        backgroundColor: 'rgba(134, 102, 48, 1)', // Input background color
     },
     textInputSmall: {
         height: 30,
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
-        backgroundColor: '#fff',
-        marginBottom: 10,
+        backgroundColor: 'rgba(134, 102, 48, 1)',
+        marginBottom: 5,
     },
     picker: {
         height: 50,
         width: '100%',
-        backgroundColor: '#fff',
+        backgroundColor: 'rgba(134, 102, 48, 1)',
     },
     addButton: {
         backgroundColor: 'rgba(224, 187, 117, 1)',
@@ -71,13 +71,18 @@ export default StyleSheet.create({
         fontSize: 16,
     },
     usernamesContainer: {
-        marginTop: 20,
+        marginTop: -20,
         width: '60%', // Adjust as needed
         alignItems: 'flex-start', // Align text to the start
+    },
+    usernamesRow: {
+        flexDirection: 'row', // Align usernames horizontally
+        flexWrap: 'wrap', // Allow wrapping to next line if necessary
     },
     usernameText: {
         color: '#fff',
         fontSize: 16,
+        marginRight: 10,
     },
     createWorldButtonContainer: {
         position: 'absolute', // Absolute positioning to place at the bottom
@@ -86,7 +91,7 @@ export default StyleSheet.create({
         alignItems: 'center', // Center the button
     },
     createWorldButton: {
-        backgroundColor: 'rgba(134, 102, 48, 1)', // Button color
+        backgroundColor: 'rgba(191, 166, 125, 1)', // Button color
         paddingVertical: 15, // Vertical padding
         paddingHorizontal: 30, // Horizontal padding
         borderRadius: 5, // Rounded corners
