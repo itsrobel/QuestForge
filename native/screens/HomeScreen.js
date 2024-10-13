@@ -6,9 +6,16 @@ import Profile from './Profile';
 import TrackStory from './TrackStoryline';
 import WorldMap from './WorldMap';
 import styles from '../stylesheets/homescreenStyle'
+import { useFonts } from 'expo-font';
+
 
 const HomeScreen = ({ navigation }) => {
     const [selectedImages, setSelectedImages] = useState([]);
+
+    const [loaded, error] = useFonts({
+      'Inter_18pt-Regular': require('../assets/fonts/Inter_18pt-Regular.ttf'),
+      'JetBrainsMono_18pt-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
+  });
 
     // Stat values
     const stats = {
@@ -94,7 +101,7 @@ const HomeScreen = ({ navigation }) => {
           style={styles.buttonContainer}
           onPress={() => navigation.navigate('Profile')}
         >
-          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center' }}>Go to Profile</Text>
+          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center', fontFamily: 'JetBrainsMono_18pt-Regular'}}>Go to Profile</Text>
         </TouchableOpacity>
 
         {/* World Map Button */}
@@ -102,7 +109,7 @@ const HomeScreen = ({ navigation }) => {
           style={styles.buttonContainer}
           onPress={() => navigation.navigate('WorldMap')}
         >
-          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center' }}>World Map</Text>
+          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center', fontFamily: 'JetBrainsMono_18pt-Regular'}}>World Map</Text>
         </TouchableOpacity>
 
         {/* Track Storyline Button */}
@@ -110,7 +117,7 @@ const HomeScreen = ({ navigation }) => {
           style={styles.buttonContainer}
           onPress={() => navigation.navigate('TrackStory')}
         >
-          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center' }}>Track Storyline</Text>
+          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center', fontFamily: 'JetBrainsMono_18pt-Regular' }}>Track Storyline</Text>
         </TouchableOpacity>
       </View>
 
@@ -128,7 +135,7 @@ const HomeScreen = ({ navigation }) => {
                 style={styles.fileButton}
                 onPress={pickImage} // Call the image picker
             >
-                <Text style={{ color: 'rgba(3, 4, 61, 1)' }}>Upload Image</Text>
+                <Text style={{ color: 'rgba(3, 4, 61, 1)', fontFamily: 'JetBrainsMono_18pt-Regular'}}>Upload Image</Text>
             </TouchableOpacity>
        </View>
 
@@ -136,7 +143,7 @@ const HomeScreen = ({ navigation }) => {
        <View style={styles.statsContainer}>
           {Object.entries(stats).map(([key, value]) => (
               <View style={styles.statBox} key={key}>
-                 <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
+                 <Text style={[styles.statLabel, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
                  <HealthBar current={value.current} max={value.max} />
               </View>
            ))}

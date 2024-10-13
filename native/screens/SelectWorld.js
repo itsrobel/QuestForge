@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, Button, ScrollView, TouchableOpacity, Image } from 'react-native';
-
+import { useFonts } from 'expo-font';
 
 const SelectWorld = ({ navigation }) => {
   const [text, setText] = useState('');
@@ -17,6 +17,10 @@ const SelectWorld = ({ navigation }) => {
     { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
 
   ];
+  const [loaded, error] = useFonts({
+    'Inter_18pt-Regular': require('../assets/fonts/Inter_18pt-Regular.ttf'),
+    'JetBrainsMono_18pt-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
+});
 
 
   return (
@@ -33,30 +37,30 @@ const SelectWorld = ({ navigation }) => {
           style={[styles.buttonContainer, { backgroundColor: 'rgba(191, 166, 125, 1)' }]}
           onPress={() => navigation.navigate('CreateWorld')}
         >
-          <Text style={styles.buttonText}>Create World</Text>
+          <Text style={[styles.buttonText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Create World</Text>
         </TouchableOpacity>
         {/* SelectWorld Button */}
         <TouchableOpacity
           style={[styles.buttonContainer, { backgroundColor: 'rgba(134, 102, 48, 1)' }]}
           onPress={() => navigation.navigate('SelectWorld')}
         >
-          <Text style={styles.buttonText}>Select World</Text>
+          <Text style={[styles.buttonText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Select World</Text>
         </TouchableOpacity>
       </View>
 
 
-      <Text style={styles.label}>Enter World Name:</Text>
+      <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Enter World Name:</Text>
 
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}
         placeholder="Type seed name here"
         value={text}
         onChangeText={(value) => setText(value)}
       />
 
 
-      <Text style={styles.label}>Or Select a world Down Below</Text>
+      <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Or Select a world Down Below</Text>
       </View>
       
 
@@ -73,8 +77,8 @@ const SelectWorld = ({ navigation }) => {
 
         {worldData.map((row) => (
           <View key={row.id} style={styles.tableRow}>
-            <Text style={styles.tableCell}>World Name: {row.world}</Text>
-            <Text style={styles.tableCell}> Seed: {row.seed}</Text>
+            <Text style={[styles.tableCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>World Name: {row.world}</Text>
+            <Text style={[styles.tableCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}> Seed: {row.seed}</Text>
           </View>
         ))}
         <Button
@@ -83,6 +87,7 @@ const SelectWorld = ({ navigation }) => {
             console.log('World Name:', text); // Log the entered text or do something with it
             navigation.navigate('Home');
           }}
+          style={{fontFamily: 'JetBrainsMono_18pt-Regular'}}
         />
       
       </ScrollView>

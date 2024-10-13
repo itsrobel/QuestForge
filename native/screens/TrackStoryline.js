@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { useFonts } from 'expo-font';
 
 const raidImage = require('../assets/Controller icon.png'); // Replace with your actual image path
 const knowImage = require('../assets/books_icon.png'); // Replace with your actual image path
@@ -24,7 +25,12 @@ const tableData = [
   { id: '6', name: 'Compete against a raid', type: 'Raid', status: 'past' },
 ];
 
+
 const TrackStory = ({navigation}) => {
+  const [loaded, error] = useFonts({
+    'Inter_18pt-Regular': require('../assets/fonts/Inter_18pt-Regular.ttf'),
+    'JetBrainsMono_18pt-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
+  });
     return (
       
       <View style={styles.container}>
@@ -38,10 +44,10 @@ const TrackStory = ({navigation}) => {
           {/* Table 
           Header */}
           <View style={styles.tableHead}>
-            <Text style={[styles.imageCell, styles.headerCell]}></Text>
-            <Text style={[styles.tableCell, styles.headerCell]}>Experience Type</Text>
-            <Text style={[styles.tableCell, styles.headerCell]}>Event Name</Text>
-            <Text style={[styles.imageCell, styles.headerCell]}></Text>
+            <Text style={[styles.imageCell, styles.headerCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}></Text>
+            <Text style={[styles.tableCell, styles.headerCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Experience Type</Text>
+            <Text style={[styles.tableCell, styles.headerCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Event Name</Text>
+            <Text style={[styles.imageCell, styles.headerCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}></Text>
           </View>
           
           <ScrollView 
@@ -65,9 +71,9 @@ const TrackStory = ({navigation}) => {
                 {row.type === 'Raid' && <Image source={raidImage} style={styles.image} />}
                 {row.type === 'Athletics' && <Image source={athlImage} style={styles.image} />}
               </View>
-              <Text style={styles.tableCell}>{row.type}</Text>
-              <Text style={styles.tableCell}>{row.name}</Text>
-              <View style={styles.imageCell}></View>
+              <Text style={[styles.tableCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>{row.type}</Text>
+              <Text style={[styles.tableCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>{row.name}</Text>
+              <View style={[styles.imageCell, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}></View>
             </View>
           
           ))}

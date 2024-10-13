@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import SelectWorld from './SelectWorld';
 import styles from '../stylesheets/createworldStyle'
+import { useFonts } from 'expo-font';
 
 const CreateWorld = ({ navigation }) => {
     const [worldName, setWorldName] = React.useState('');
@@ -20,6 +21,10 @@ const CreateWorld = ({ navigation }) => {
             alert('Please enter a username'); // Alert if input is empty
         }
     };
+    const [loaded, error] = useFonts({
+        'Inter_18pt-Regular': require('../assets/fonts/Inter_18pt-Regular.ttf'),
+        'JetBrainsMono_18pt-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
+    });
     
     return (
     <View style={styles.container}>
@@ -36,22 +41,22 @@ const CreateWorld = ({ navigation }) => {
                 style={[styles.buttonContainer, { backgroundColor: 'rgba(134, 102, 48, 1)' }]}
                 onPress={() => navigation.navigate('CreateWorld')}
             >
-                <Text style={styles.buttonText}>Create World</Text>
+                <Text style={[styles.buttonText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Create World</Text>
             </TouchableOpacity>
             {/* SelectWorld Button */}
             <TouchableOpacity
                 style={[styles.buttonContainer, { backgroundColor: 'rgba(191, 166, 125, 1)' }]}
                 onPress={() => navigation.navigate('SelectWorld')}
             >
-                <Text style={styles.buttonText}>Select World</Text>
+                <Text style={[styles.buttonText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Select World</Text>
             </TouchableOpacity>
         </View>
 
         {/* Text Input for World Name */}
         <View style={[styles.inputContainer, { marginTop: 200 }]}>
-                <Text style={styles.label}>World Name</Text>
+                <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>World Name</Text>
                 <TextInput
-                    style={styles.textInput}
+                    style={[styles.textInput, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}
                     value={worldName}
                     onChangeText={setWorldName} // Update state with the input value
                     placeholder="Enter world name" // Placeholder text
@@ -60,11 +65,11 @@ const CreateWorld = ({ navigation }) => {
 
         {/* Theme Dropdown */}
         <View style={styles.inputContainer}>
-                <Text style={styles.label}>Theme:</Text>
+            <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Theme:</Text>
                 <Picker
                     selectedValue={selectedTheme}
                     onValueChange={(itemValue) => setSelectedTheme(itemValue)}
-                    style={styles.picker}
+                    style={[styles.picker, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}
                 >
                     <Picker.Item label="Select Theme" value="" />
                     <Picker.Item label="Sci-Fi" value="sci-fi" />
@@ -77,9 +82,9 @@ const CreateWorld = ({ navigation }) => {
 
         {/* Add User Section */}
         <View style={styles.inputContainer}>
-                <Text style={styles.label}>Add User:</Text>
+                <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Add User:</Text>
                 <TextInput
-                    style={styles.textInputSmall}
+                    style={[styles.textInputSmall, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}
                     value={userName}
                     onChangeText={setUserName}
                     placeholder="Enter username"
@@ -88,16 +93,16 @@ const CreateWorld = ({ navigation }) => {
                     style={styles.addButton}
                     onPress={addUser} // Call the addUser function
                 >
-                    <Text style={styles.addButtonText}>Add User</Text>
+                    <Text style={[styles.addButtonText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Add User</Text>
                 </TouchableOpacity>
         </View>
 
         {/* Display Usernames */}        
         <View style={styles.usernamesContainer}>
-            <Text style={styles.label}>Added Players:</Text>
+            <Text style={[styles.label, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Added Players:</Text>
             <View style={styles.usernamesRow}>
                 {usernames.map((username, index) => (
-                <Text key={index} style={styles.usernameText}>{username}</Text>
+                <Text key={index} style={[styles.usernameText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>{username}</Text>
                 ))}
             </View>
         </View>
@@ -111,7 +116,7 @@ const CreateWorld = ({ navigation }) => {
                         alert(`World Created: ${worldName}, Theme: ${selectedTheme}, Users: ${usernames.join(', ')}`);
                     }}
                 >
-                    <Text style={styles.createWorldButtonText}>Create World</Text>
+                    <Text style={[styles.createWorldButtonText, {fontFamily: 'JetBrainsMono_18pt-Regular'}]}>Create World</Text>
                 </TouchableOpacity>
         </View>
     </View>

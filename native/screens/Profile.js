@@ -1,6 +1,8 @@
 import * as React from 'react-native';
-
+import { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { useFonts } from 'expo-font';
+
 
 
 
@@ -18,7 +20,15 @@ const ProfileButton = ({title, icon, navigation}) => {
 }
 
  // HealthBar component
- const HealthBar = ({ current, max }) => {
+ const HealthBar = ({ current, max, title }) => {
+
+    const image = title === 'athletics'
+        ? require('../assets/dumbell_icon.png')
+        : title === 'creativity'
+        ? require('../assets/Star icon.png')
+        : title === 'knowledge'
+        ? require('../assets/books_icon.png')
+        : require('../assets/Drama Masks from Figma.png');
 
     const width = (current/max === 1) ? 200 : 
                   (current/max === 0.75) ? 150 : 
@@ -29,12 +39,19 @@ const ProfileButton = ({title, icon, navigation}) => {
     
 
     return (
+        <View style={{flex:1, flexDirection: 'row', justifyContent: "space-evenly", alignItems: 'center'}}>
         <View style={styles.healthBarContainer}>
+            <Text style={styles.statLabel}>{title.charAt(0).toUpperCase() + title.slice(1)}:</Text>
             <View style={[styles.healthBar, { width: width }]} /> 
             {/* width: `${percentage}%`  */}
             <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
 
             
+            
+
+            
+        </View>
+            <Image source={image} style={[styles.buttonImage, {marginRight: 20}]}/>
         </View>
     );
 };
@@ -72,6 +89,20 @@ const SpecialStatContainer = ({title, width}) => {
 }
 
 const Profile = ({ navigation }) => {
+    const [loaded, error] = useFonts({
+        'Inter_18pt-Regular': require('../assets/fonts/Inter_18pt-Regular.ttf'),
+        'JetBrainsMono_18pt-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
+    });
+
+    useEffect(() => {
+        if (loaded) {
+            console.log('Fonts loaded');
+        }
+    }, [loaded, error]);
+
+    if (!loaded && !error) {
+        console.log('Fonts not loaded');
+    }
     
     // Stat values
     const stats = {
@@ -128,9 +159,9 @@ const Profile = ({ navigation }) => {
                             {Object.entries(stats).map(([key, value]) => (
                                 <View style={styles.statBox} key={key}>
 
-                                    <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
-
-                                    <HealthBar current={value.current} max={value.max} />
+                                    {/* <Text style={styles.statLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text> */}
+                                    
+                                    <HealthBar current={value.current} max={value.max} title={key}/>
                                     
                                 </View>
                             ))}
@@ -152,7 +183,7 @@ const Profile = ({ navigation }) => {
             
             
         </View> // container
-    )
+    );
 }
 
 
@@ -243,6 +274,8 @@ const styles = {
     },
     userName: {
         fontSize: 20,
+        fontFamily: 'JetBrainsMono_18pt-Regular',
+        color: '#312D46'
 
     },
     buttonImage: {
@@ -253,7 +286,7 @@ const styles = {
     profileButtonText: {
         color: '#C8DDE7',
         fontSize: 25,
-        fontFamily: 'Arial',
+        fontFamily: 'JetBrainsMono_18pt-Regular'
     },
     roundedRectangle: {
         // width: 400,
@@ -306,10 +339,11 @@ const styles = {
         textAlign: 'right',
         paddingRight: 30,
         marginRight: -20,
-        // marignRight: 100,
         marginTop: 20,
-        marginBottom: 20,
-        color: '#6976C3',
+        marginBottom: 30,
+        color: '#B6B2CB',
+        fontFamily: 'JetBrainsMono_18pt-Regular',
+        
     },
 
     statBar: {
@@ -353,6 +387,7 @@ const styles = {
         alignItems: 'center',
         flexDirection: 'column',
         marginRight: 20,
+        
         // position: 'absolute',
         // top: 20, // Position from the top
         // right: 20, // Align to the right
@@ -368,36 +403,40 @@ const styles = {
         width: '100%', // Width of each stat box
         // padding: 16,
         paddingTop: 16,
-        paddingHorizontal: 20, // Horizontal padding
+        paddingHorizontal: 5, // Horizontal padding
         marginVertical: 10, // Increased vertical space between boxes
-        borderRadius: 5, // Optional rounded corners for boxes
+        borderRadius: 20, // Optional rounded corners for boxes
         // width: 200, // Width of each stat box
       },
       statLabel: {
         color: 'rgba(60, 73, 143, 1)',
         fontSize: 18,
         marginBottom: 5,
+        fontFamily: "JetBrainsMono_18pt-Regular",
       },
       healthBarContainer: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         marginVertical: 5, // Space between bars
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
       },
       healthBar: {
         height: 30, // Height of the bar
         backgroundColor: 'rgba(57, 52, 70, 1)', // Bar color
         borderRadius: 5,
-        marginRight: 10, // Space between bar and text
+        marginRight: 5, // Space between bar and text
         // flex: 1, // Allows the bar to take remaining space
         // marginLeft: -80,
+       
       },
       healthBarText: {
         color: 'rgba(60, 73, 143, 1)',
-        fontSize: 20,
+        fontSize: 13,
         marginBottom: 5,
-        marginRight: 10,
+        marginRight: 20,
+        fontFamily: 'JetBrainsMono_18pt-Regular',
       },
       importedStatsContainer: {
         position: 'absolute',
