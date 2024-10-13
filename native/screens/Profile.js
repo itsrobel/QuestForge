@@ -1,11 +1,27 @@
 import * as React from 'react-native';
 
-import { View, Text, Image, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 
 
-const ProfileButton = ({title, icon}) => {
+const openAlbum = () => {
+    const photos = {
+        photo1: require('../assets/Star icon.png'),
+        photo2: require('../assets/Star icon.png'),
+        photo3: require('../assets/Star icon.png'),
+        photo4: require('../assets/Star icon.png'),
+        photo5: require('../assets/Star icon.png'),
+        photo6: require('../assets/Star icon.png'),
+    }
+
+    
+}
+
+const ProfileButton = ({title, icon, navigation}) => {
     return (
-        <TouchableOpacity style={styles.profileButton}>
+        <TouchableOpacity 
+            style={styles.profileButton}
+            onPress={() => navigation.navigate('Home')}
+        >
             <Text style={styles.profileButtonText}>{title}</Text>
             <Image source={icon} style={styles.buttonImage} />
 
@@ -20,8 +36,7 @@ const ProfileButton = ({title, icon}) => {
 
     return (
         <View style={styles.healthBarContainer}>
-
-            <View style={styles.healthBar} /> 
+            <View style={[styles.healthBar, { width: current}]} /> 
             {/* width: `${percentage}%`  */}
             <Text style={styles.healthBarText}>{`${current} / ${max}`}</Text>
         </View>
@@ -70,7 +85,7 @@ const Profile = ({ navigation }) => {
                         <Text style={styles.userName}>@username</Text>
                         
                         <View style={styles.profileButtons}>
-                            <ProfileButton title="Photos" icon="../assets/Camera icon.png" />
+                            <ProfileButton title="Photos" icon="../assets/Camera icon.png" navigation={navigation}/>
                             <ProfileButton title="Friends" icon="../assets/Controller icon.png" />
                         </View>
 
@@ -302,7 +317,7 @@ const styles = {
     profilePicture: {
         width: 150,
         height: 150,
-        backgroundColor: '#6976C3',
+        backgroundColor: '#312D46',
         borderRadius: 75,
         marginTop: 10,
     },
@@ -327,7 +342,9 @@ const styles = {
         flexDirection: 'row',
         backgroundColor: '#DDF5FD', // Green background for each stat box
         width: '100%', // Width of each stat box
-        padding: 15,
+        // padding: 16,
+        paddingTop: 16,
+        paddingHorizontal: 20, // Horizontal padding
         marginVertical: 10, // Increased vertical space between boxes
         borderRadius: 5, // Optional rounded corners for boxes
         // width: 200, // Width of each stat box
