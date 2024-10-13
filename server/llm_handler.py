@@ -6,9 +6,13 @@ import os
 config = Config(read_timeout=1000)
 AWS_REGION = "us-west-2"
 
+
+AKI = os.getenv("AKI")
+SAK = os.getenv("SAK")
+
 session = boto3.Session(
-    aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+    aws_access_key_id=AKI,
+    aws_secret_access_key=SAK,
 )
 
 
