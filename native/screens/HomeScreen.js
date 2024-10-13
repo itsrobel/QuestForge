@@ -69,7 +69,23 @@ const HomeScreen = ({ navigation }) => {
     
     return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home Screen tesy</Text>
+      {/* Logo Image */}
+      <Image
+            source={require('../assets/logo.png')} // Update the path as necessary
+            style={{ width: 500, height: 500, position: 'absolute', top: -150, left: 10 }} // Adjust size and position
+      />
+
+      <View style={styles.leftBox}>
+            {/* Positioning the button here */}
+            {/* <View style={styles.uploadButtonContainer}>
+                <TouchableOpacity
+                    style={styles.fileButton}
+                    onPress={pickImage}
+                >
+                    <Text style={{ color: '#fff' }}>Upload Image</Text>
+                </TouchableOpacity>
+            </View> */}
+       </View>
       
       {/* Button Container */}
       <View style={{ position: 'absolute', bottom: 80, right: 20 }}>
@@ -78,7 +94,7 @@ const HomeScreen = ({ navigation }) => {
           style={styles.buttonContainer}
           onPress={() => navigation.navigate('Profile')}
         >
-          <Text style={{ color: '#fff', textAlign: 'center' }}>Go to Profile</Text>
+          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center' }}>Go to Profile</Text>
         </TouchableOpacity>
 
         {/* World Map Button */}
@@ -86,7 +102,7 @@ const HomeScreen = ({ navigation }) => {
           style={styles.buttonContainer}
           onPress={() => navigation.navigate('WorldMap')}
         >
-          <Text style={{ color: '#fff', textAlign: 'center' }}>World Map</Text>
+          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center' }}>World Map</Text>
         </TouchableOpacity>
 
         {/* Track Storyline Button */}
@@ -94,17 +110,25 @@ const HomeScreen = ({ navigation }) => {
           style={styles.buttonContainer}
           onPress={() => navigation.navigate('TrackStory')}
         >
-          <Text style={{ color: '#fff', textAlign: 'center' }}>Track Storyline</Text>
+          <Text style={{ color: 'rgba(3, 4, 61, 1)', textAlign: 'center' }}>Track Storyline</Text>
         </TouchableOpacity>
       </View>
 
       {/* Image Upload Button */}
-      <View style={{ position: 'absolute', bottom: 50, width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}>
+      {/* <View style={{ position: 'absolute', bottom: 50, width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity
                 style={styles.fileButton}
                 onPress={pickImage} // Call the image picker
             >
                 <Text style={{ color: '#fff' }}>Upload Image</Text>
+            </TouchableOpacity>
+       </View> */}
+       <View style={{ position: 'absolute', bottom: 50, width: '100%', left: 500, flexDirection: 'row'}}>
+            <TouchableOpacity
+                style={styles.fileButton}
+                onPress={pickImage} // Call the image picker
+            >
+                <Text style={{ color: 'rgba(3, 4, 61, 1)' }}>Upload Image</Text>
             </TouchableOpacity>
        </View>
 
