@@ -46,38 +46,17 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="TrackStory"
-          component={TrackStory}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="WorldMap"
-          component={WorldMap}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="PhotoAlbum"
-          component={PhotoAlbum}
-          options={{ headerShown: false }}
-        />
-
-        <Stack.Screen
-          name="CreateWorld"
-          component={CreateWorld}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SelectWorld"
-          component={SelectWorld}
-          options={{ headerShown: false }}
+          component={TrackStory} // Ensure this component is correctly defined in TrackStoryline.js
+          options={{headerShown: false}}
         />
         <Stack.Screen 
           name="Opening"
@@ -97,4 +76,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
