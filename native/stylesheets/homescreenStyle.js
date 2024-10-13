@@ -62,4 +62,24 @@ export default StyleSheet.create({
     color: 'rgba(60, 73, 143, 1)',
     fontSize: 14,
   },
+  leftBox: {
+    position: 'absolute',
+    top: 150,
+    left: 45,
+    width: '77%', // 2/3 of the screen width
+    height: '100%', // Full height of the screen
+    backgroundColor: 'rgba(255, 255, 255, 0.3)', // Set background color with 30% opacity
+    padding: 10, // Padding inside the box
+    borderTopLeftRadius: 40, // Round top left corner
+    borderTopRightRadius: 40,
+    // justifyContent: 'flex-end', // Align children to the bottom
+    // alignItems: 'center', // Center children horizontally
+    // paddingBottom: 20,
+  },
+//   uploadButtonContainer: {
+//     alignItems: 'center', // Center align the button
+//     justifyContent: 'center',
+//     position: 'relative', // Change from 'absolute' to 'relative' to keep it in the flow of 'leftBox'
+//     marginBottom: 20, // Add margin to position above the bottom
+//   },
 });
