@@ -89,38 +89,17 @@ const TrackStory = ({navigation}) => {
 // Styles for the table and cells
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
-    padding: 40,
-    backgroundColor: '#312D46',
-  },
-  tableContainer:{
-    flex: 1,
     padding: 10,
-    marginTop: 20,
-    
-  },
-  tableHead:{
-    
-    backgroundColor: '#CA9845',
-    flexDirection: 'row',
-    paddingVertical: 10,
-    borderBottomColor: '#866630',
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginBottom:20,
+    backgroundColor: '#312D46',
   },
 
   tableRow: {
-    // backgroundColor: '#CA9845',
-  
+     backgroundColor: '#CA9845',
     flexDirection: 'row',
+    borderBottomWidth: 1,
     borderBottomColor: '#866630',
-    paddingVertical: 5,
-    borderRadius: 5,
-    marginBottom:10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingVertical: 10,
+    borderRadius: 10,
   },
   tableCell: {
     flex: 1,
@@ -132,7 +111,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   imageCell: {
-    flex: 0.5,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -141,18 +120,6 @@ const styles = StyleSheet.create({
     height: 40, // Proportional image height
     resizeMode: 'contain', // Maintain aspect ratio
   },
-  currentRow: {
-    backgroundColor: '#E0BB75', // Green for current events
-  },
-  pastRow: {
-    backgroundColor: '#CA9845', // Orange for past events
-  },
-  logoImageStyle: {
-    width: 40,
-    height: 40,
-  }
-
-
 });
 
 export default TrackStory;
