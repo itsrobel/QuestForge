@@ -9,6 +9,7 @@ import TrackStory from './screens/TrackStoryline';
 import WorldMap from './screens/WorldMap';
 import CreateWorld from './screens/CreateWorld';
 import SelectWorld from './screens/SelectWorld';
+import PhotoAlbum from './screens/PhotoAlbum';
 
 const Stack = createNativeStackNavigator();
 const logo = require('./assets/logo.png'); // Ensure you have the correct path to your logo image
@@ -16,7 +17,7 @@ const logo = require('./assets/logo.png'); // Ensure you have the correct path t
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="CreateWorld">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -43,10 +44,16 @@ export default function App() {
           options={({ navigation }) => ({
             headerShown: true,
             header: () => (
-              <Image source={logo} style={{ width: 40, height: 40 }} />
+              <Image source={logo} style={{ width: 400, height: 400 }} />
             ),
           })}
         />
+        <Stack.Screen
+          name="PhotoAlbum"
+          component={PhotoAlbum}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="CreateWorld"
           component={CreateWorld}
