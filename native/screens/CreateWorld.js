@@ -25,7 +25,10 @@ const CreateWorld = ({ navigation }) => {
         'Inter_18pt-Regular': require('../assets/fonts/Inter_18pt-Regular.ttf'),
         'JetBrainsMono_18pt-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
     });
-    
+    const createWorld = async ()=> {
+
+        fetch ("https:localhost:5000", {"name": worldName, "world": selectedTheme, "owner_id": 1, "characer": "wizzard"}).then(res => res.json()).then(data => console.log(data))
+    }
     return (
     <View style={styles.container}>
         {/* Logo Image */}
