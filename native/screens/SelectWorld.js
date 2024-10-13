@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, Text, Button, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useFonts } from 'expo-font';
-
+import socket from './Socket';
 const SelectWorld = ({ navigation }) => {
   const [text, setText] = useState("");
   const worldData = [
@@ -9,12 +9,12 @@ const SelectWorld = ({ navigation }) => {
     { id: 2, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
     { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
     { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
-    { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
-    { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
-    { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
-    { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
-    { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
-    { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+    { id: 5, world: 'My World', seed: 'fsdfsdfsd' },
+    { id: 6, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+    { id: 7, world: 'My World', seed: 'fsdfsdfsd' },
+    { id: 8, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+    { id: 9, world: 'My World', seed: 'fsdfsdfsd' },
+    { id: 10, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
 
   ];
   const [loaded, error] = useFonts({
@@ -22,26 +22,25 @@ const SelectWorld = ({ navigation }) => {
     'JetBrainsMono_18pt-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
 });
 
-  useEffect(() => {
-    // Listen for messages from the server
-    socket.on("get_worlds", (data) => {
-      for (let i = 0; i < len(data); i++) {
-        let wt  = {id: i ,world: data[i], seed: "some cool number"}
-        worldData.push(wt)
-      } 
-    });
+useEffect(() => {
+  // Listen for messages from the server
+  socket.on("get_worlds", (data) => {
+    for (let i = 0; i < data.length; i++) {
+      let wt = { id: i, world: data[i], seed: "some cool number" };
+      worldData.push(wt);
+    }
+  });
 
-    // Clean up the listener on component unmount
-    return () => {
-      socket.off("message");
-    };
-  }, []);
-
-  const sendMessage = () => {
-    // Emit a message to the server
-    socket.emit("message", "Hello from React Native!");
+  // Clean up the listener on component unmount
+  return () => {
+    socket.off("get_worlds");
   };
+}, []);
 
+const sendMessage = () => {
+  // Emit a message to the server
+  socket.emit("message", "Hello from React Native!");
+};
   return (
     <View style={styles.container}>
       <Image
