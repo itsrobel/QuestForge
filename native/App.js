@@ -15,15 +15,17 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Welcome' }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="TrackStory"
           component={TrackStory} // Ensure this component is correctly defined in TrackStoryline.js
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
