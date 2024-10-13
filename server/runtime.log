@@ -11,3 +11,66 @@
 2024-10-13 03:18:33,129 45149 INFO Found credentials in environment variables.
 2024-10-13 03:30:02,275 48027 INFO Found credentials in environment variables.
 2024-10-13 03:30:22,528 48277 INFO Found credentials in environment variables.
+2024-10-13 04:43:49,497 2533 INFO Found credentials in environment variables.
+2024-10-13 04:48:12,523 22956 INFO Found credentials in environment variables.
+2024-10-13 04:52:14,047 24515 INFO Found credentials in environment variables.
+2024-10-13 04:56:12,949 25212 INFO Found credentials in environment variables.
+2024-10-13 04:56:59,370 25420 INFO Found credentials in environment variables.
+2024-10-13 04:57:13,221 25545 INFO Found credentials in environment variables.
+2024-10-13 04:57:45,642 25632 INFO Found credentials in environment variables.
+2024-10-13 04:58:08,368 25803 INFO Found credentials in environment variables.
+2024-10-13 04:59:22,495 26094 INFO Found credentials in environment variables.
+2024-10-13 04:59:36,353 26200 INFO Found credentials in environment variables.
+2024-10-13 05:05:54,449 29764 INFO Found credentials in environment variables.
+2024-10-13 05:32:39,967 36172 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:32:39,983 36172 INFO 
+After completing the quest to study at the library, the player's knowledge has significantly increased. As they continue their journey to find the vampire king, they stumble upon a small village in the mountains. The villagers tell them of a powerful artifact that can aid them in their quest. The player, with their newfound knowledge, is able to decipher the ancient map that leads them to the artifact's location. However, they must first defeat a group of trolls guarding it. With their increased knowledge, the player is able to come up with a clever strategy to defeat the trolls and claim the artifact. This artifact not only aids them in their quest, but also increases their knowledge even further, making them a formidable opponent for the vampire king.
+2024-10-13 05:33:29,124 36320 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:33:29,131 36320 INFO 
+As the game master, you observe the player's stats and decide that the quest they completed at the library will have a positive impact on their knowledge. The player's hard work and dedication to studying at the library has greatly improved their knowledge stat, giving them a +5 boost in knowledge. This will prove to be useful in their quest to find the vampire king, as they now have a better understanding of the mythical creatures they will encounter.
+
+As the player continues on their journey, they come across a village under attack by a group of vampires. Without hesitation, the player uses their newfound knowledge to quickly devise a plan to defeat the vampires. With their enhanced knowledge, the player is able to identify the vampires' weaknesses and defeats them with ease. The villagers are grateful and offer to help the player in their search for the vampire king.
+
+With the villagers' assistance, the player is able to locate the vampire king's castle. As they approach the castle, they encounter a powerful enchantment that blocks their path. Remembering their quest at the library, the player uses their knowledge to break the enchantment and enter the castle. Inside, they confront the vampire king and after a fierce battle, they are able to defeat him and save the kingdom.
+
+The player's success in their
+2024-10-13 05:38:21,982 37737 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:38:21,998 37737 INFO 
+
+statchange: +5 knowledge,
+story: The player had been searching for the vampire king for weeks, tirelessly following every lead and clue they could find. However, they soon realized that their lack of knowledge on mythical creatures was hindering their progress. In a stroke of genius, they decided to visit the library and study up on all things supernatural. After hours of reading and note-taking, the player emerged with a newfound wealth of knowledge on the subject. Armed with this new information, the player set out once again to find the vampire king, this time with a much better understanding of how to defeat him.
+2024-10-13 05:38:40,255 37857 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:38:40,271 37857 INFO 
+statchange: +5 to knowledge,
+story: After completing your quest at the library, you feel a sense of enlightenment and gain a deeper understanding of the world. This newfound knowledge will surely aid you in your journey to find the vampire king. As you continue to explore and uncover secrets, your knowledge will only continue to grow. The library was just the beginning of your quest, but it has already proven to be a valuable experience.
+2024-10-13 05:39:30,377 38045 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:39:30,393 38045 INFO 
+change: +10,
+stat: knowledge,
+story: The player, still on their quest to find the vampire king, decided to visit the library to gather more information. As they spent hours studying, their knowledge greatly increased, allowing them to uncover new clues and leads. With their newfound knowledge, the player was able to find the vampire king's lair and defeat him, completing their quest.
+2024-10-13 05:40:02,901 38222 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:40:02,916 38222 INFO 
+change: +10,
+stat: knowledge,
+story: The player's journey to find the vampire king led them to a mysterious library in the depths of the forest. As they entered, they were greeted by a wise old librarian who offered to help them in their quest. The player eagerly accepted and spent hours pouring over ancient tomes and scrolls, absorbing knowledge about the vampire king's whereabouts and weaknesses. Their knowledge grew immensely, making them more confident and efficient in their search. In the end, they were able to defeat the vampire king and bring peace to the land.
+2024-10-13 05:40:45,102 38472 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:40:45,119 38472 INFO 
+{
+  "change": 5,
+  "stat": "knowledge",
+  "story": "The player, who was on a quest to find the vampire king, stumbled upon a mysterious library. Curiosity got the best of them and they entered the library, expecting to find some clues about the king's whereabouts. However, instead of finding any information about the king, the player found themselves engrossed in reading various books and gaining new knowledge. They spent hours in the library, studying and absorbing all the information they could. By the time they left, their knowledge had increased significantly, making them more equipped to find and defeat the vampire king." 
+}
+2024-10-13 05:41:31,367 38586 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:41:31,381 38586 INFO 
+{
+    "change": 3,
+    "stat": "knowledge",
+    "story": "After completing the quest to go to the library and study, the player's knowledge has increased by 3 points. This newfound knowledge helps the player in their quest to find the vampire king as they are now able to decipher ancient texts and find hidden clues." 
+}
+2024-10-13 05:41:37,752 38635 INFO HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 200 OK"
+2024-10-13 05:41:37,765 38635 INFO 
+{
+  "change": 10,
+  "stat": "knowledge",
+  "story": "You enter the library and are immediately greeted by the warm scent of old books and the sound of rustling pages. As you sit down at a desk, you pull out your notes and begin to study. You spend hours pouring over ancient texts and deciphering cryptic symbols. Your hard work pays off as you gain a deeper understanding of the history of vampires. You feel your knowledge grow and your confidence in your quest to find the vampire king increases. As you leave the library, you can't help but feel a sense of accomplishment and a newfound determination to continue your journey." 
+}
