@@ -6,6 +6,22 @@ client = MongoClient("mongodb://localhost:27017/")
 
 
 db = client["game_db"]  # Use your database name here
+dworld = db["world"]
+dplayer = db["world"]
+
+
+class World:
+    def __init__(self, name, owner_id, theme):
+        self.name = name
+        self.owner_id = owner_id
+        self.theme = theme
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "owner_id": self.theme,
+            "theme": self.theme,
+        }
 
 
 class Skill:
