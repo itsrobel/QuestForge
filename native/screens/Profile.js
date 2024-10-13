@@ -3,24 +3,12 @@ import * as React from 'react-native';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 
 
-const openAlbum = () => {
-    const photos = {
-        photo1: require('../assets/Star icon.png'),
-        photo2: require('../assets/Star icon.png'),
-        photo3: require('../assets/Star icon.png'),
-        photo4: require('../assets/Star icon.png'),
-        photo5: require('../assets/Star icon.png'),
-        photo6: require('../assets/Star icon.png'),
-    }
-
-    
-}
 
 const ProfileButton = ({title, icon, navigation}) => {
     return (
         <TouchableOpacity 
             style={styles.profileButton}
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('PhotoAlbum')}
         >
             <Text style={styles.profileButtonText}>{title}</Text>
             <Image source={icon} style={styles.buttonImage} />
@@ -63,6 +51,7 @@ const SpecialStatContainer = ({title, icon}) => {
 }
 
 const Profile = ({ navigation }) => {
+    
     // Stat values
     const stats = {
         athletics: { current: 60, max: 100, icon: '../assets/dumbell_icon.png' },
