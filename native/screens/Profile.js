@@ -1,9 +1,9 @@
 import * as React from 'react-native';
 
-import { View, Text, Image, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Button,  FlatList} from 'react-native';
 
 
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+// import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { useFonts } from 'expo-font';
 
 
