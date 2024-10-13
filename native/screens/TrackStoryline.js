@@ -46,7 +46,8 @@ const TrackStory = ({navigation}) => {
           
           <ScrollView 
             showsVerticalScrollIndicator={true}
-        >
+            
+          >
           {/* Table Rows */}
           {tableData.map((row) => (
             <View key={row.id}

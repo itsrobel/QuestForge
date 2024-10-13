@@ -6,19 +6,27 @@ const SelectWorld = ({ navigation }) => {
   const [text, setText] = useState('');
   const worldData = [
     { id: 1, world: 'My World', seed: 'fsdfsdfsd' },
-    { id: 2, world: 'My World 2', seed: 'fsdfsdfvcxsd' }
+    { id: 2, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+    { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
+    { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+    { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
+    { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+    { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
+    { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+    { id: 3, world: 'My World', seed: 'fsdfsdfsd' },
+    { id: 4, world: 'My World 2', seed: 'fsdfsdfvcxsd' },
+
   ];
 
 
   return (
-    <ScrollView style={styles.container}>
-      {/* Logo Image */}
+    <View style={styles.container}>
       <Image
         source={require('../assets/logo.png')} // Update the path as necessary
-        style={{ width: 500, top: -150, left: 10 }} // Adjust size and position
+        style={{ width: 500, marginTop: -150, left: 10 }} // Adjust size and position
       />
 
-
+      <View style={styles.topContainer}>
       <View style={styles.topButtonContainer}>
         {/* CreateWorld Button */}
         <TouchableOpacity
@@ -49,22 +57,36 @@ const SelectWorld = ({ navigation }) => {
 
 
       <Text style={styles.label}>Or Select a world Down Below</Text>
+      </View>
+      
 
 
-      {worldData.map((row) => (
-        <View key={row.id} style={styles.tableRow}>
-          <Text style={styles.tableCell}>World Name: {row.world}</Text>
-          <Text style={styles.tableCell}> Seed: {row.seed}</Text>
-        </View>
-      ))}
-      <Button
-        title="Join"
-        onPress={() => {
-          console.log('World Name:', text); // Log the entered text or do something with it
-          navigation.navigate('Home');
-        }}
-      />
-    </ScrollView>
+
+
+    <ScrollView
+      style={{marginTop:-180, width: '80%', alignSelf: 'center', flex: 1}} showsVerticalScrollIndicator={true}>
+
+      
+
+      
+        
+
+        {worldData.map((row) => (
+          <View key={row.id} style={styles.tableRow}>
+            <Text style={styles.tableCell}>World Name: {row.world}</Text>
+            <Text style={styles.tableCell}> Seed: {row.seed}</Text>
+          </View>
+        ))}
+        <Button
+          title="Join"
+          onPress={() => {
+            console.log('World Name:', text); // Log the entered text or do something with it
+            navigation.navigate('Home');
+          }}
+        />
+      
+      </ScrollView>
+    </View>
   );
 };
 
@@ -76,7 +98,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, // Ensure the view takes up the full screen
     padding: 20,
-    backgroundColor: 'rgba(15, 13, 51, 1)', // Set the background color
+
+    backgroundColor: 'rgba(15, 13, 51, 1)',
+     // Set the background color
   },
   topButtonContainer: {
     flexDirection: 'row', // Align buttons horizontally
@@ -122,4 +146,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
+  topContainer: {
+    padding: 20,
+    flex: 1,
+    marginTop: -180,
+  }
 });
