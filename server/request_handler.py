@@ -4,12 +4,15 @@ from flask_cors import CORS
 
 from flask import Flask, request
 from flask_socketio import SocketIO, join_room, leave_room, emit
-# from langchain.llms import OpenAI
 
-
+from langchain_openai import OpenAI
+import json
+import uuid
 import os
+from game_master_handler import GROUP_BOSS_FIGHT_PROMPT
+from langchain_core.output_parsers import StrOutputParser
 
-from server.llm_handler import initialize_bedrock_llm, initialize_llm
+llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0.7)
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret!"
@@ -21,131 +24,149 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 
-# RESTful API endpoints
-@app.route("/http-call")
-def http_call():
-    """return JSON with string data as the value"""
-    data = {"data": "This text was fetched using an HTTP call to server on render"}
-    return jsonify(data)
+group_boss_fight_chain = GROUP_BOSS_FIGHT_PROMPT | llm | StrOutputParser()
+
+# Store user data (in a real application, use a database)
+users = {}
+rooms = {}
+invites = {}
 
 
 @socketio.on("connect")
-def connected():
-    """event listener when client connects to the server"""
-    print(request.sid)
-    print("client has connected")
-    emit("connect", {"data": f"id: {request.sid} is connected"})
-
-
-# @socketio.on("data")
-# def handle_message(data):
-#     """event listener when client types a message"""
-#     print("data from the front end: ", str(data))
-#     emit("data", {"data": data, "id": request.sid}, broadcast=True)
+def handle_connect():
+    print(f"Client connected: {request.sid}")
 
 
 @socketio.on("disconnect")
-def disconnected():
-    """event listener when client disconnects to the server"""
-    print("user disconnected")
-    emit("disconnect", f"user {request.sid} disconnected", broadcast=True)
+def handle_disconnect():
+    print(f"Client disconnected: {request.sid}")
+    for room in rooms:
+        if request.sid in rooms[room]["users"]:
+            rooms[room]["users"].remove(request.sid)
 
 
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
-
-# Initialize LangChain LLM
-llm = initialize_bedrock_llm()
-
-# Store active namespaces and their members
-namespaces = {}
+@socketio.on("register")
+def handle_register(data):
+    username = data["username"]
+    users[request.sid] = {"username": username, "stats": data["stats"]}
+    emit("register_response", {"message": f"Registered as {username}"})
 
 
-@socketio.on("create_or_join_namespace")
-def create_or_join_namespace(data):
-    namespace = data["namespace"]
-    user_id = data["user_id"]
+@socketio.on("create_party")
+def handle_create_party(data):
+    party_id = str(uuid.uuid4())
+    rooms[party_id] = {"users": [request.sid], "leader": request.sid}
+    join_room(party_id)
+    emit(
+        "party_created", {"party_id": party_id, "message": "Party created successfully"}
+    )
 
-    if namespace not in namespaces:
-        namespaces[namespace] = set()
 
-    namespaces[namespace].add(user_id)
-    join_room(namespace)
+@socketio.on("invite_to_party")
+def handle_invite(data):
+    invitee_username = data["invitee"]
+    party_id = data["party_id"]
+
+    if request.sid != rooms[party_id]["leader"]:
+        emit(
+            "invite_response",
+            {"success": False, "message": "Only party leader can send invites"},
+        )
+        return
+
+    invitee_sid = next(
+        (sid for sid, user in users.items() if user["username"] == invitee_username),
+        None,
+    )
+    if not invitee_sid:
+        emit("invite_response", {"success": False, "message": "User not found"})
+        return
+
+    invite_id = str(uuid.uuid4())
+    invites[invite_id] = {"party_id": party_id, "invitee": invitee_sid}
 
     emit(
-        "namespace_update",
-        {"namespace": namespace, "members": list(namespaces[namespace])},
-        room=namespace,
+        "party_invite",
+        {
+            "invite_id": invite_id,
+            "party_id": party_id,
+            "inviter": users[request.sid]["username"],
+        },
+        room=invitee_sid,
     )
-    print(f"User {user_id} joined namespace {namespace}")
+
+    emit(
+        "invite_response",
+        {"success": True, "message": f"Invite sent to {invitee_username}"},
+    )
 
 
-@socketio.on("leave_namespace")
-def leave_namespace(data):
-    namespace = data["namespace"]
-    user_id = data["user_id"]
+@socketio.on("accept_invite")
+def handle_accept_invite(data):
+    invite_id = data["invite_id"]
+    if invite_id not in invites:
+        emit("accept_invite_response", {"success": False, "message": "Invalid invite"})
+        return
 
-    if namespace in namespaces and user_id in namespaces[namespace]:
-        namespaces[namespace].remove(user_id)
-        leave_room(namespace)
+    party_id = invites[invite_id]["party_id"]
+    join_room(party_id)
+    rooms[party_id]["users"].append(request.sid)
 
-        if not namespaces[namespace]:
-            del namespaces[namespace]
-        else:
-            emit(
-                "namespace_update",
-                {"namespace": namespace, "members": list(namespaces[namespace])},
-                room=namespace,
-            )
+    emit("player_joined", {"username": users[request.sid]["username"]}, room=party_id)
 
-    print(f"User {user_id} left namespace {namespace}")
+    emit(
+        "accept_invite_response",
+        {"success": True, "message": "Joined party successfully", "party_id": party_id},
+    )
+
+    del invites[invite_id]
 
 
-@socketio.on("invite_to_namespace")
-def invite_to_namespace(data):
-    inviter_id = data["inviter_id"]
-    invitee_id = data["invitee_id"]
-    namespace = data["namespace"]
+@socketio.on("start_boss_fight")
+def handle_boss_fight(data):
+    room = data["party_id"]
+    boss_details = data["boss_details"]
 
-    if namespace in namespaces and inviter_id in namespaces[namespace]:
+    if request.sid != rooms[room]["leader"]:
         emit(
-            "namespace_invitation",
-            {"namespace": namespace, "inviter_id": inviter_id},
-            room=invitee_id,
+            "boss_fight_response",
+            {"success": False, "message": "Only party leader can start boss fight"},
         )
-        print(f"User {inviter_id} invited user {invitee_id} to namespace {namespace}")
-    else:
-        emit(
-            "invitation_error",
-            {"message": "Invalid namespace or inviter"},
-            room=inviter_id,
+        return
+
+    party_stats = [users[user_id]["stats"] for user_id in rooms[room]["users"]]
+    current_story = "The party has entered the boss chamber..."
+
+    result = group_boss_fight_chain.run(
+        {
+            "party_stats": json.dumps(party_stats),
+            "current_story": current_story,
+            "boss_details": json.dumps(boss_details),
+        }
+    )
+
+    fight_data = json.loads(result)
+
+    for player_change in fight_data["player_stat_changes"]:
+        user_id = next(
+            uid
+            for uid in rooms[room]["users"]
+            if users[uid]["username"] == player_change["player_name"]
         )
+        for stat_change in player_change["stat_changes"]:
+            users[user_id]["stats"][stat_change["stat"]] += stat_change["change"]
 
-
-# NOTE: This function sends a message to the namespace that the current user exists in
-@socketio.on("send_message")
-def send_message(data):
-    namespace = data["namespace"]
-    user_id = data["user_id"]
-    message = data["message"]
-
-    if namespace in namespaces and user_id in namespaces[namespace]:
-        # Use LangChain LLM to process the message
-        ai_response = llm(message)
-
-        emit(
-            "new_message",
-            {
-                "namespace": namespace,
-                "user_id": user_id,
-                "message": message,
-                "ai_response": ai_response,
+    emit(
+        "boss_fight_result",
+        {
+            "fight_data": fight_data,
+            "updated_stats": {
+                users[uid]["username"]: users[uid]["stats"]
+                for uid in rooms[room]["users"]
             },
-            room=namespace,
-        )
-        print(f"Message sent in namespace {namespace} by user {user_id}")
-    else:
-        emit("message_error", {"message": "Invalid namespace or user"}, room=user_id)
+        },
+        room=room,
+    )
 
 
 if __name__ == "__main__":

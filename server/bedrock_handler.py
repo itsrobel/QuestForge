@@ -7,14 +7,18 @@ config = Config(read_timeout=1000)
 AWS_REGION = "us-west-2"
 
 
-AKI = os.getenv("AKI")
-SAK = os.getenv("SAK")
+AKI = os.getenv("AK")
+SAK = os.getenv("AS")
 
 session = boto3.Session(
     aws_access_key_id=AKI,
     aws_secret_access_key=SAK,
 )
 
+cred = boto3.Session(
+    aws_access_key_id=AKI,
+    aws_secret_access_key=SAK,
+).get_credentials()
 
 MODEL_ID = "anthropic.claude-3-sonnet-20240229-v1:0"
 HAIKU_MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
