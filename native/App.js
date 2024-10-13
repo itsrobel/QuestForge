@@ -10,7 +10,7 @@ import WorldMap from './screens/WorldMap';
 import CreateWorld from './screens/CreateWorld';
 import SelectWorld from './screens/SelectWorld';
 import PhotoAlbum from './screens/PhotoAlbum';
-import Login from './screens/Login'; // Import the Login component
+import Login from './Login'; // Import the Login component
 import { auth } from './firebaseConfig';
 
 const Stack = createNativeStackNavigator();
@@ -29,17 +29,17 @@ export default function App() {
   
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={isLoggedIn ? "Home" : "Login"}>
+      {/* <Stack.Navigator initialRouteName={isLoggedIn ? "HomeScreen" : "Login"}>
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
         <Stack.Screen name="TrackStory" component={TrackStory} options={{ headerShown: false }} />
         <Stack.Screen name="WorldMap" component={WorldMap} options={{ headerShown: true, header: () => (<Image source={logo} style={{ width: 400, height: 400 }} />) }} />
         <Stack.Screen name="PhotoAlbum" component={PhotoAlbum} options={{ headerShown: false }} />
         <Stack.Screen name="CreateWorld" component={CreateWorld} options={{ headerShown: false }} />
         <Stack.Screen name="SelectWorld" component={SelectWorld} options={{ headerShown: false }} />
-      </Stack.Navigator>
-      {/* <Stack.Navigator initialRouteName="CreateWorld">
+      </Stack.Navigator> */}
+      <Stack.Navigator initialRouteName="CreateWorld">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -76,7 +76,7 @@ export default function App() {
           component={SelectWorld}
           options={{ headerShown: false }}
         />
-      </Stack.Navigator> */}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

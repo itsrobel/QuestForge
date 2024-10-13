@@ -1,15 +1,18 @@
-import React from 'react';
+//import React from 'react';
 import { getAuth, EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+//import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { auth } from './firebaseConfig';
 import HomeScreen from './screens/HomeScreen';
+import React, { useState } from 'react'; // Add useState here
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native'; // Import other necessary components
+
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         auth.signInWithEmailAndPassword(email, password)
             .then(() => {
                 navigation.navigate('HomeScreen'); // Navigate to Home after login
@@ -36,6 +39,8 @@ const Login = ({ navigation }) => {
             />
             {error ? <Text style={styles.error}>{error}</Text> : null}
             <Button title="Login" onPress={handleLogin} />
+            <Button title="Go to HomeScreen" onPress={() => navigation.navigate('HomeScreen')} />
+
         </View>
     );
 };
