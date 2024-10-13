@@ -27,9 +27,6 @@ AWS - for the main bedrock/story engagement + Cloudflare - for event classificat
 Data bricks - for the data irrigation LanceDB + Langchain
 
 playright - webscapping for events happening
-Google Maps - for event location
-
-Auth0 - for mobile login
 
 ## Env
 for react native to work for web run the following
