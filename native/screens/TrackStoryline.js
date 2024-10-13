@@ -83,6 +83,8 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 5,
     marginBottom:10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   tableCell: {
     flex: 1,

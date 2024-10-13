@@ -1,45 +1,60 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import Profile from './screens/Profile';
 import TrackStory from './screens/TrackStoryline';
 import WorldMap from './screens/WorldMap';
+
 const Stack = createNativeStackNavigator();
+const logo = require('./assets/logo.png'); // Ensure you have the correct path to your logo image
 
 export default function App() {
-  
-  
   return (
-
-
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home"> 
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={{headerShown: false}}
+          options={({ navigation }) => ({
+            headerShown: true,
+            header: () => (
+              <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
+                <Image source={logo} style={{ width: 50, height: 50 }} />
+              </TouchableWithoutFeedback>
+            ),
+          })}
         />
+        
         <Stack.Screen
           name="TrackStory"
-          component={TrackStory} // Ensure this component is correctly defined in TrackStoryline.js
-          options={{headerShown: false}}
+          component={TrackStory}
+          options={({ navigation }) => ({
+            headerShown: true,
+            header: () => (
+              <Image source={logo} style={{ width: 40, height: 40 }} />
+            ),
+          })}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="WorldMap"
-          component={WorldMap} // Ensure this component is correctly defined in TrackStoryline.js
-          options={{headerShown: false}}
+          component={WorldMap}
+          options={({ navigation }) => ({
+            headerShown: true,
+            header: () => (
+              <Image source={logo} style={{ width: 40, height: 40 }} />
+            ),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
-    
   );
 }
 
