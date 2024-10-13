@@ -17,7 +17,7 @@ const logo = require('./assets/logo.png'); // Ensure you have the correct path t
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TrackStory">
+      <Stack.Navigator initialRouteName="CreateWorld">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
